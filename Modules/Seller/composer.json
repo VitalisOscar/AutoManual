@@ -1,0 +1,23 @@
+{
+    "name": "vendor/seller",
+    "description": "",
+    "authors": [
+        {
+            "name": "",
+            "email": ""
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Seller\\Providers\\SellerServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Seller\\": ""
+        }
+    }
+}
