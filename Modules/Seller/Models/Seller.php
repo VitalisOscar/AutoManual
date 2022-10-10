@@ -65,6 +65,8 @@ class Seller extends Model
 
     function profile_type(){ return $this->belongsTo(ProfileType::class, 'profile_type_id'); }
 
+    function cars(){ return $this->hasMany(Car::class, 'seller_id'); }
+
 
     // Scopes
     function scopeActive($q){
