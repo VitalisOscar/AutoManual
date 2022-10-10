@@ -3,9 +3,10 @@
 namespace Modules\Seller\Http\Controllers\Cars;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Lang;
 use Modules\Seller\Events\Cars\CarListedEvent;
+use Modules\Seller\Models\Car;
 use Modules\Seller\Traits\ManagesCarListingInfo;
 
 class AddCarController extends Controller
@@ -13,7 +14,7 @@ class AddCarController extends Controller
 
     use Validator, ManagesCarListingInfo;
 
-    public function index(Request $request){
+    public function index(){
         // Validate the request
         $validator = $this->getValidator();
 
@@ -26,7 +27,8 @@ class AddCarController extends Controller
 
         $car = $this->addCar(
             $this->seller(),
-            $validator->validated()
+            $validator->validated(),
+            Car::STATUS_PENDING_APPROVAL
         );
 
         if(is_string($car)){
@@ -39,5 +41,6 @@ class AddCarController extends Controller
         CarListedEvent::dispatch($car);
         DB::commit();
 
+        return $this->json->success(Lang::get('seller::success.listing_created'));
     }
 }

@@ -37,6 +37,7 @@ class CreateCarsTable extends Migration
             $table->foreignId('car_make_id')->constrained(CarMake::TABLE_NAME);
             $table->foreignId('car_model_id')->constrained(CarModel::TABLE_NAME);
             $table->json('features')->nullable();
+            $table->integer('price')->index();
             $table->string('status')->index();
 
             $table->dateTime('created_at')->nullable();

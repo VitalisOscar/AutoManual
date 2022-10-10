@@ -19,7 +19,7 @@ class Car extends Model
     protected $table = "sellers_cars";
 
     // Supported seller status
-    const STATUS_PENDING = "Pending";
+    const STATUS_PENDING_APPROVAL = "Pending Approval";
     const STATUS_APPROVED = "Approved";
     const STATUS_REJECTED = "Rejected";
     const STATUS_DELISTED = "Delisted";
@@ -27,7 +27,12 @@ class Car extends Model
     // Enums
     const TRANSMISSIONS = ['Automatic', 'Manual', 'Semi-Automatic'];
     const FUEL_TYPES = ['Petrol', 'Diesel', 'Electric', 'Hybrid'];
-    const DRIVE_TYPES = ['All-Wheel-Drive (AWD)', 'Front Wheel Drive (FWD)', 'Rear Wheel Drive (RWD)', '4 Wheel Drive (4WD)'];
+    const DRIVE_TYPES = [
+        'AWD' => 'All-Wheel-Drive',
+        'FWD' => 'Front Wheel Drive',
+        'RWD' => 'Rear Wheel Drive',
+        '4WD' => '4 Wheel Drive'
+    ];
 
     const FEATURES = [];
 
@@ -99,7 +104,7 @@ class Car extends Model
 
     // Scopes
     function scopePending($q){
-        $q->whereStatus(self::STATUS_PENDING);
+        $q->whereStatus(self::STATUS_PENDING_APPROVAL);
     }
 
     function scopeApproved($q){
@@ -126,7 +131,7 @@ class Car extends Model
     // helpers
     function isApproved(){ return $this->status == self::STATUS_APPROVED; }
 
-    function isPending(){ return $this->status == self::STATUS_PENDING; }
+    function isPending(){ return $this->status == self::STATUS_PENDING_APPROVAL; }
 
     function isRejected(){ return $this->status == self::STATUS_REJECTED; }
 

@@ -12,6 +12,7 @@ trait Validator{
 
     function getValidator(){
         return validator(request()->all(), [
+            'price' => 'required|numeric',
             'title' => 'required|string',
             'year' => 'required|numeric|min:1950|max:'.today()->year,
             'mileage' => 'required|numeric|min:0',
@@ -19,14 +20,20 @@ trait Validator{
             'transmission' => 'required|in:'.implode(',', Car::TRANSMISSIONS),
             'color' => 'required',
             'engine' => 'required|numeric',
-            'drive_type' => 'required|in:'.implode(',', Car::DRIVE_TYPES),
-            'location',
-            'description',
+            'drive_type' => 'required|in:'.implode(',', array_keys(Car::DRIVE_TYPES)),
+            'location' => 'array',
+            'location.town' => 'required|string',
+            'location.area' => 'nullable|string',
+            'description' => 'nullable',
             'category' => 'required|exists:'.Category::TABLE_NAME.',id',
             'body_type' => 'required|exists:'.BodyType::TABLE_NAME.',id',
             'make' => 'required|exists:'.CarMake::TABLE_NAME.',id',
             'model' => 'required|exists:'.CarModel::TABLE_NAME.',id',
-            'features',
+            'features' => 'nullable|array',
+            'features.*' => 'in:'.implode(',', Car::FEATURES),
+            'main_image' => 'required|image',
+            'images' => 'required|array',
+            'images.*' => 'required|image',
         ], [
 
         ]);

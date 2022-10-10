@@ -20,6 +20,7 @@ class CarImage extends Model
 
 
     protected $fillable = [
+        'car_id',
         'path',
         'is_main'
     ];

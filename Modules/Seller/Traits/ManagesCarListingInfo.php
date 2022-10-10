@@ -45,13 +45,18 @@ trait ManagesCarListingInfo{
      *
      * @param Seller $seller The seller adding the car
      * @param array $data Validated request data
+     * @param string $status The status of the new car (Might be pending approval or payment)
      *
      * @return string|Car
      */
-    function addCar($seller, $data){
+    function addCar($seller, $data, $status){
         try{
             // Get the car object
-            $car = $this->getCarFromRequest($seller, null, $data);
+            $new_car = new Car([
+                'status' => $status
+            ]);
+
+            $car = $this->getCarFromRequest($seller, $new_car, $data);
 
             if(!$car->save()){
                 return Lang::get('errors.unexpected');
@@ -79,24 +84,12 @@ trait ManagesCarListingInfo{
      * Get a car being edited, or added
      *
      * @param Seller $seller The seller adding or editing the car
-     * @param Car $original Original car model
+     * @param Car $car The car object to add values from request
      * @param array $data Validated request data
      *
      * @return null|Car
      */
-    private function getCarFromRequest($seller, $original, $data){
-        // when adding, this will be null
-        // when editing, will be an id or slug
-        if($original == null){
-            // adding, car is a new object
-            $car = new Car();
-
-            // pending approval
-            $car->status = Car::STATUS_PENDING;
-        }else{
-            $car = $original;
-        }
-
+    private function getCarFromRequest($seller, $car, $data){
         // set attributes to values passed
         // relations
         $car->category_id = $data['category'];
@@ -111,8 +104,8 @@ trait ManagesCarListingInfo{
 
         // car location
         $car->location = [
-            'town' => $data['town'],
-            'area' => $data['area'] ?? null,
+            'town' => $data['location']['town'],
+            'area' => $data['location']['area'] ?? null,
         ];
 
         // overview
@@ -135,10 +128,7 @@ trait ManagesCarListingInfo{
         $car->features = $features;
 
         // pricing
-        $car->pricing = [
-            'price' => $data['price']['price'],
-            'negotiable' => isset($data['price']['negotiable']),
-        ];
+        $car->price = $data['price'];
 
         return $car;
     }

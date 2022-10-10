@@ -52,5 +52,6 @@ class EditCarController extends Controller
         CarUpdatedEvent::dispatch($car);
         DB::commit();
 
+        return $this->json->success(Lang::get('seller::success.listing_updated'));
     }
 }
