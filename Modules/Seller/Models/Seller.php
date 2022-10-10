@@ -49,7 +49,7 @@ class Seller extends Model
     protected $hidden = [
         'created_at', 'updated_at',
         'verified_at', 'user_id',
-        'profile_type','profile_type_id'
+        'profile_type_id'
     ];
 
     protected $casts = [
@@ -82,6 +82,14 @@ class Seller extends Model
     function scopeCanCreateListings($q){
         $q->verified() // Verified by admin
             ->active() // Active status
+            ->whereHas('user', function($user){
+                $user->fullyVerified();
+            }); // User verification done
+    }
+
+    function scopeListingsCanBePublic($q){
+        // Listings can be shown to public
+        $q->active() // Active status
             ->whereHas('user', function($user){
                 $user->fullyVerified();
             }); // User verification done
