@@ -12,22 +12,17 @@ class ProfileTypeTableSeeder extends Seeder
      */
     public function run(): void
     {
-        if(ProfileType::where('name', 'Personal')->first() == null){
-            ProfileType::create([
-                'name' => 'Personal'
-            ]);
+        $names = ['Personal', 'Dealership', 'Auto Company'];
+
+        foreach($names as $name){
+
+            if(ProfileType::where('name', $name)->first() == null){
+                ProfileType::create([
+                    'name' => $name
+                ]);
+            }
+
         }
 
-        if(ProfileType::where('name', 'Dealership')->first() == null){
-            ProfileType::create([
-                'name' => 'Dealership'
-            ]);
-        }
-
-        if(ProfileType::where('name', 'Auto Company')->first() == null){
-            ProfileType::create([
-                'name' => 'Auto Company'
-            ]);
-        }
     }
 }
