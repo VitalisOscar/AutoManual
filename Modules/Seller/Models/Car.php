@@ -24,6 +24,11 @@ class Car extends Model
     const STATUS_REJECTED = "Rejected";
     const STATUS_DELISTED = "Delisted";
 
+    // Enums
+    const TRANSMISSIONS = ['Automatic', 'Manual', 'Semi-Automatic'];
+    const FUEL_TYPES = ['Petrol', 'Diesel', 'Electric', 'Hybrid'];
+    const DRIVE_TYPES = ['All-Wheel-Drive (AWD)', 'Front Wheel Drive (FWD)', 'Rear Wheel Drive (RWD)', '4 Wheel Drive (4WD)'];
+
     const FEATURES = [];
 
     protected $fillable = [

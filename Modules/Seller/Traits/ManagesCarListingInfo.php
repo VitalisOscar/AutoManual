@@ -15,7 +15,7 @@ trait ManagesCarListingInfo{
      * Edit an existing car
      *
      * @param Seller $seller The seller editing the car
-     * @param Car $original Original car object to edit
+     * @param Car $original_car Original car object to edit
      * @param array $data Validated request data
      *
      * @return string|Car

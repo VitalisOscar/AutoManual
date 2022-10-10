@@ -9,6 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Modules\Account\Models\User;
+use Modules\Seller\Models\Seller;
 
 class Controller extends BaseController
 {
@@ -35,6 +36,24 @@ class Controller extends BaseController
 
             if(get_class($user) == User::class){
                 return $user;
+            }
+
+            return null;
+        }catch(Exception $e){
+            return null;
+        }
+    }
+
+    /**
+     * Get the current seller profile
+     * @return Seller
+     */
+    function seller(){
+        try{
+            $user = $this->user();
+
+            if($user != null){
+                return $user->seller;
             }
 
             return null;
