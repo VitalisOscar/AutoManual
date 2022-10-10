@@ -3,12 +3,67 @@
 namespace Modules\Seller\Traits;
 
 use Exception;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Modules\Seller\Models\Car;
 use Modules\Seller\Models\CarImage;
 
 trait ManagesCarImages{
+
+    /**
+     * Upload the main image of a listing, when adding the listing
+     *
+     * @param Car $car
+     * @param UploadedFile $image_file Request data containing the image under main_image key
+     *
+     * @return true|string
+     */
+    function uploadMainImage($car, $image_file){
+        try{
+
+            $image = $car->images()->create([
+                'is_main' => true,
+                'path' => $image_file->store($this->getUploadDir(), 'public')
+            ]);
+
+            if($image->id){
+                return true;
+            }
+
+            return Lang::get('seller::errors.unable_to_upload_images');
+        }catch(Exception $e){
+            return Lang::get('errors.server');
+        }
+    }
+
+    /**
+     * Upload additional images of a listing, when adding the listing
+     *
+     * @param Car $car
+     * @param UploadedFile[] $image_files Request data containing the image under images key
+     *
+     * @return true|string
+     */
+    function uploadExtraImages($car, $image_files){
+        try{
+            foreach($image_files as $image){
+                $img = $car->images()->create([
+                    'is_main' => false,
+                    'path' => $image->store($this->getUploadDir(), 'public')
+                ]);
+
+                if(!$img->id){
+                    return Lang::get('seller::errors.unable_to_upload_images');
+                }
+            }
+
+            return true;
+
+        }catch(Exception $e){
+            return Lang::get('errors.server');
+        }
+    }
 
     /**
      * Add more images to a car
@@ -135,6 +190,14 @@ trait ManagesCarImages{
         }catch(Exception $e){
             return Lang::get('errors.server');
         }
+    }
+
+    /**
+     * Get the upload dir, in format upload_dir/yyyy/mm/dd
+     * @return string
+     */
+    function getUploadDir(){
+        return CarImage::UPLOAD_DIR.'/'.str_replace('-', '/', today()->format('Y-m-d'));
     }
 
 }
