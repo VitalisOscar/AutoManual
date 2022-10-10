@@ -27,7 +27,10 @@ class CreateCarsTable extends Migration
             $table->string('fuel')->index();
             $table->string('transmission')->index();
             $table->string('color');
+            $table->integer('engine');
+            $table->string('drive_type');
             $table->text('description')->nullable();
+            $table->json('location');
             $table->foreignId('seller_id')->constrained(Seller::TABLE_NAME);
             $table->foreignId('category_id')->constrained(Category::TABLE_NAME);
             $table->foreignId('body_type_id')->constrained(Category::TABLE_NAME);

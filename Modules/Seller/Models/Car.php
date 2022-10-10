@@ -24,6 +24,8 @@ class Car extends Model
     const STATUS_REJECTED = "Rejected";
     const STATUS_DELISTED = "Delisted";
 
+    const FEATURES = [];
+
     protected $fillable = [
         'title',
         'year',
@@ -31,6 +33,9 @@ class Car extends Model
         'fuel',
         'transmission',
         'color',
+        'engine',
+        'drive_type',
+        'location',
         'description',
         'seller_id',
         'category_id',
@@ -67,6 +72,7 @@ class Car extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'features' => 'array',
+        'location' => 'array',
     ];
 
 
