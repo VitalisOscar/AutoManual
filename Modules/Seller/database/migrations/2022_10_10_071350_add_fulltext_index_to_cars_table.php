@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
+use Modules\Seller\Models\Car;
 
-class CreateCarsTable extends Migration
+class AddFulltextIndexToCarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +15,7 @@ class CreateCarsTable extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table->bigIncrements('id');
-
-            $table->dateTime('created_at')->nullable();
-            $table->dateTime('updated_at')->nullable();
-        });
+        DB::statement("ALTER TABLE ".Car::TABLE_NAME." ADD FULLTEXT search_fulltext(title, description)");
     }
 
     /**
@@ -28,6 +25,8 @@ class CreateCarsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::table(Car::TABLE_NAME, function (Blueprint $table) {
+            $table->dropIndex('search_fulltext');
+        });
     }
 }

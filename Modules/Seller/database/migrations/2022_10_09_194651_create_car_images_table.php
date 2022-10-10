@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Modules\Seller\Models\CarImage;
 
 class CreateCarImagesTable extends Migration
 {
@@ -13,8 +14,11 @@ class CreateCarImagesTable extends Migration
      */
     public function up()
     {
-        Schema::table('car_images', function (Blueprint $table) {
+        Schema::create(CarImage::TABLE_NAME, function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->string('path');
+            $table->boolean('is_main')->index();
 
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
@@ -28,6 +32,6 @@ class CreateCarImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_images');
+        Schema::dropIfExists(CarImage::TABLE_NAME);
     }
 }

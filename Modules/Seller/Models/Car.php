@@ -30,6 +30,7 @@ class Car extends Model
         'mileage',
         'fuel',
         'transmission',
+        'color',
         'description',
         'seller_id',
         'category_id',

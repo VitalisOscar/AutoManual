@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\CarMake;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,8 +14,11 @@ class CreateCarMakesTable extends Migration
      */
     public function up()
     {
-        Schema::create('car_makes', function (Blueprint $table) {
+        Schema::create(CarMake::TABLE_NAME, function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateCarMakesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('car_makes');
+        Schema::dropIfExists(CarMake::TABLE_NAME);
     }
 }
