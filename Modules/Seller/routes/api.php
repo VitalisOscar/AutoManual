@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Seller\Http\Controllers\Cars\AddCarController;
 use Modules\Seller\Http\Controllers\Cars\EditCarController;
+use Modules\Seller\Http\Controllers\Cars\ListedCarsController;
 use Modules\Seller\Http\Controllers\Profile\SellerSignUpController;
 
 Route::prefix('seller')
@@ -20,12 +21,16 @@ Route::prefix('seller')
     ->name('.listings')
     ->group(function(){
 
+        Route::get('', [ListedCarsController::class, 'all']);
+
         Route::post('add', [AddCarController::class, 'index'])->name('.add');
 
         // Single
-        Route::prefix('{car_id}')
+        Route::prefix('single/{car_id}')
         ->name('.single')
         ->group(function(){
+
+            Route::get('', [ListedCarsController::class, 'single']);
 
             Route::post('edit', [EditCarController::class, 'index'])->name('.edit');
 

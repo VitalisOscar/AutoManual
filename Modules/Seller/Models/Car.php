@@ -38,6 +38,7 @@ class Car extends Model
 
     protected $fillable = [
         'title',
+        'price',
         'year',
         'mileage',
         'fuel',
@@ -103,7 +104,7 @@ class Car extends Model
 
 
     // Scopes
-    function scopePending($q){
+    function scopePendingApproval($q){
         $q->whereStatus(self::STATUS_PENDING_APPROVAL);
     }
 
@@ -157,6 +158,10 @@ class Car extends Model
 
     function getMileageAttribute($val){
         return number_format($val).' Km';
+    }
+
+    function getPriceAttribute($val){
+        return number_format($val);
     }
 
 }

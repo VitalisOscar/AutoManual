@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Lang;
 use Modules\Account\Events\Auth\UserLoggedInEvent;
 use Modules\Account\Models\User;
-use Propaganistas\LaravelPhone\PhoneNumber;
 
 class LoginController extends Controller
 {
