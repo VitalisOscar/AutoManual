@@ -141,4 +141,12 @@ class Car extends Model
         return $this->images_count;
     }
 
+    function getEngineAttribute($val){
+        return number_format($val).' cc';
+    }
+
+    function getMileageAttribute($val){
+        return number_format($val).' Km';
+    }
+
 }
