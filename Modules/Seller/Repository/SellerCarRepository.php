@@ -74,6 +74,23 @@ class SellerCarRepository{
 
         }
 
+        // Ordering
+        if($request->filled('sort')){
+            $sort = strtolower($request->get('sort'));
+
+            if($sort == 'oldest'){
+                $cars->oldest();
+            }else if($sort == 'atoz'){
+                $cars->orderBy('title', 'ASC');
+            }else if($sort == 'ztoa'){
+                $cars->orderBy('title', 'DESC');
+            }else{
+                $cars->latest();
+            }
+        }else{
+            $cars->latest();
+        }
+
         // No need to fetch seller info
         $cars->without('seller');
 
