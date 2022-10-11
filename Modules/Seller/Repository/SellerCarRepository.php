@@ -74,6 +74,8 @@ class SellerCarRepository{
 
         }
 
+        // No need to fetch seller info
+        $cars->without('seller');
 
         return new ResultSet($cars);
     }

@@ -39,7 +39,6 @@ class Seller extends Model
     protected $with = ['user', 'profile_type'];
 
     protected $appends = [
-        'profile_type',
         'slug',
         'registered_on',
         'verified',

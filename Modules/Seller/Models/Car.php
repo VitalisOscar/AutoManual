@@ -63,12 +63,6 @@ class Car extends Model
     protected $appends = [
         'slug',
         'added_on',
-        'seller',
-        'category',
-        'body_type',
-        'make',
-        'model',
-        'main_image',
         'total_images'
     ];
 
@@ -162,6 +156,10 @@ class Car extends Model
 
     function getPriceAttribute($val){
         return number_format($val);
+    }
+
+    function getDriveTypeAttribute($val){
+        return self::DRIVE_TYPES[$val] ?? $val;
     }
 
 }

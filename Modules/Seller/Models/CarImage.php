@@ -44,6 +44,11 @@ class CarImage extends Model
     // Relations
     function car(){ return $this->belongsTo(Car::class, 'car_id'); }
 
+    // Scopes
+    function scopeMain($q){
+        $q->whereIsMain(true);
+    }
+
     // Accessors
     function getUrlAttribute(){
         return asset('storage/' . $this->path);
