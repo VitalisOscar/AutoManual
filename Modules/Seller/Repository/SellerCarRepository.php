@@ -108,6 +108,8 @@ class SellerCarRepository{
     function getSingleCar($seller, $car_id){
         return $seller->cars()
             ->where(Car::TABLE_NAME.'.id', $car_id)
+            ->without(['seller', 'main_image'])
+            ->with('images')
             ->first();
     }
 
