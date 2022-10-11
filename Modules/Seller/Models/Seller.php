@@ -8,6 +8,7 @@ use App\Traits\Misc\FormatedTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Modules\Account\Models\User;
+use Modules\MarketPlace\Models\Car;
 
 class Seller extends Model
 {

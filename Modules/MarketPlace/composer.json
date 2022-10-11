@@ -1,0 +1,23 @@
+{
+    "name": "vendor/marketplace",
+    "description": "",
+    "authors": [
+        {
+            "name": "",
+            "email": ""
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\MarketPlace\\Providers\\MarketPlaceServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\MarketPlace\\": ""
+        }
+    }
+}

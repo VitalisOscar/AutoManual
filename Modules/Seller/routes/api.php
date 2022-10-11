@@ -1,10 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Seller\Http\Controllers\Cars\AddCarController;
-use Modules\Seller\Http\Controllers\Cars\EditCarController;
-use Modules\Seller\Http\Controllers\Cars\ListedCarsController;
-use Modules\Seller\Http\Controllers\Profile\SellerSignUpController;
+use Modules\Seller\Http\Controllers\SellerSignUpController;
 
 Route::prefix('seller')
 ->middleware(['auth:user', 'is_seller'])
@@ -15,27 +12,5 @@ Route::prefix('seller')
         ->middleware(['not_seller'])
         ->withoutMiddleware('is_seller')
         ->name('.get_started');
-
-    // Listings
-    Route::prefix('listings')
-    ->name('.listings')
-    ->group(function(){
-
-        Route::get('', [ListedCarsController::class, 'all']);
-
-        Route::post('add', [AddCarController::class, 'index'])->name('.add');
-
-        // Single
-        Route::prefix('single/{car_id}')
-        ->name('.single')
-        ->group(function(){
-
-            Route::get('', [ListedCarsController::class, 'single']);
-
-            Route::post('edit', [EditCarController::class, 'index'])->name('.edit');
-
-        }); // End single
-
-    }); // End listings
 
 });

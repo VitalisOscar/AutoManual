@@ -1,4 +1,5 @@
 {
     "Account": true,
-    "Seller": true
+    "Seller": true,
+    "MarketPlace": true
 }

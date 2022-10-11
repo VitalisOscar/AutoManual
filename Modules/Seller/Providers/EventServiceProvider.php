@@ -4,11 +4,7 @@ namespace Modules\Seller\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Modules\Seller\Events\Cars\CarListedEvent;
-use Modules\Seller\Events\Cars\CarUpdatedEvent;
 use Modules\Seller\Events\SellerCreatedEvent;
-use Modules\Seller\Listeners\Cars\CarListedListener;
-use Modules\Seller\Listeners\Cars\CarUpdatedListener;
 use Modules\Seller\Listeners\SellerCreatedListener;
 
 class EventServiceProvider extends ServiceProvider
@@ -18,12 +14,6 @@ class EventServiceProvider extends ServiceProvider
         SellerCreatedEvent::class => [
             SellerCreatedListener::class,
         ],
-        CarListedEvent::class => [
-            CarListedListener::class,
-        ],
-        CarUpdatedEvent::class => [
-            CarUpdatedListener::class,
-        ]
     ];
 
     /**
