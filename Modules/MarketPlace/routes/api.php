@@ -4,6 +4,26 @@ use Illuminate\Support\Facades\Route;
 use Modules\MarketPlace\Http\Controllers\Listing\AddCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\EditCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\ListedCarsController;
+use Modules\MarketPlace\Http\Controllers\MarketPlace\PublicListingsController;
+
+// public Listings
+Route::prefix('marketplace')
+->name('marketplace')
+->group(function(){
+
+    Route::get('', [PublicListingsController::class, 'all']);
+
+    // Single
+    Route::prefix('{car_id}')
+    ->name('.single')
+    ->group(function(){
+
+        Route::get('', [PublicListingsController::class, 'single']);
+
+    }); // End single
+
+}); // End public listings
+
 
 Route::prefix('seller')
 ->middleware(['auth:user', 'is_seller'])

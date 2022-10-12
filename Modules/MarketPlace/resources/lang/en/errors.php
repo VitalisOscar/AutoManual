@@ -15,6 +15,10 @@ return [
     'already_a_seller' => 'You already have a seller profile associated with your account',
     'not_a_seller' => 'You do not have a seller profile associated with your account',
 
+    // Seller listing errors
     'car_does_not_exist' => 'The car listing does not exist, or action is not allowed',
     'nothing_to_update' => 'No changes have been made. Nothing to update',
+
+    // Marketplace erros
+    'listing_does_not_exist' => 'The car listing does not exist or has been deleted',
 ];
