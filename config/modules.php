@@ -103,9 +103,9 @@ return [
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => true],
             'command' => ['path' => 'Console', 'generate' => true],
-            'migration' => ['path' => 'Database/Migrations', 'generate' => true],
-            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
-            'factory' => ['path' => 'Database/factories', 'generate' => true],
+            'migration' => ['path' => 'database/migrations', 'generate' => true],
+            'seeder' => ['path' => 'database/seeds', 'generate' => true],
+            'factory' => ['path' => 'database/factories', 'generate' => true],
             'model' => ['path' => 'Entities', 'generate' => true],
             'routes' => ['path' => 'Routes', 'generate' => true],
             'controller' => ['path' => 'Http/Controllers', 'generate' => true],
