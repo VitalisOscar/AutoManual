@@ -61,13 +61,13 @@ class PublicListingsRepository{
     /**
      * Get a single public car listing
      *
-     * @param int $car_id
+     * @param string $slug
      *
      * @return Car|null
      */
-    function getSingleCar($car_id){
+    function getSingleCar($slug){
         return Car::public() // Public
-            ->where(Car::TABLE_NAME.'.id', $car_id)
+            ->where(Car::TABLE_NAME.'.slug', $slug)
             ->without(['main_image'])
             ->with('images')
             ->first();

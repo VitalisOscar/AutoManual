@@ -15,9 +15,9 @@ class PublicListingsController extends Controller
         );
     }
 
-    public function single(PublicListingsRepository $repository, $car_id){
+    public function single(PublicListingsRepository $repository, $slug){
         // Get the car
-        $car = $repository->getSingleCar($car_id);
+        $car = $repository->getSingleCar($slug);
 
         if($car == null){
             return Lang::get('marketplace::errors.listing_does_not_exist');

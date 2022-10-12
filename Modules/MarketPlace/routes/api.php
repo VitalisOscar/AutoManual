@@ -14,7 +14,7 @@ Route::prefix('marketplace')
     Route::get('', [PublicListingsController::class, 'all']);
 
     // Single
-    Route::prefix('{car_id}')
+    Route::prefix('{slug}')
     ->name('.single')
     ->group(function(){
 
