@@ -117,6 +117,9 @@ trait ManagesCarListingInfo{
         $car->drive_type = $data['drive_type'];
         $car->year = $data['year'];
 
+        // Slug
+        $car->slug = \Illuminate\Support\Str::slug($data['title']);
+
         // features
         $features = [];
 

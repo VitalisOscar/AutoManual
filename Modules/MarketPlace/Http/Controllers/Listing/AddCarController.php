@@ -37,6 +37,16 @@ class AddCarController extends Controller
             return $this->json->error($car);
         }
 
+
+        // Update slug with id
+        $car->slug .= '-'.$car->id;
+
+        if(!$car->save()){
+            DB::rollBack();
+            return $this->json->error(Lang::get('errors.unexpected'));
+        }
+
+
         // Car was listed
         CarListedEvent::dispatch($car);
         DB::commit();

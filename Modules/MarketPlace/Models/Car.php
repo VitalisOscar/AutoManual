@@ -55,14 +55,14 @@ class Car extends Model
         'car_make_id',
         'car_model_id',
         'features',
-        'status'
+        'status',
+        'slug'
     ];
 
     protected $with = ['seller', 'category', 'body_type', 'make', 'model', 'main_image'];
     protected $withCount = ['images'];
 
     protected $appends = [
-        'slug',
         'added_on',
         'total_images'
     ];
@@ -135,10 +135,6 @@ class Car extends Model
 
 
     // Accessors
-    function getSlugAttribute(){
-        return \Illuminate\Support\Str::slug($this->title.' '.$this->id);
-    }
-
     function getAddedOnAttribute(){
         return $this->prettyDate($this->created_at);
     }
