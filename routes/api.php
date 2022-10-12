@@ -1,6 +1,6 @@
 <?php
 
-use Rawilk\LaravelModules\Facades\Module;
+use Nwidart\Modules\Facades\Module;
 
 $modules = Module::scan();
 
