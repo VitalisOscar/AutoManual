@@ -21,4 +21,5 @@ return [
 
     // Marketplace erros
     'listing_does_not_exist' => 'The car listing does not exist or has been deleted',
+    'seller_does_not_exist' => 'The seller page does not exist',
 ];
