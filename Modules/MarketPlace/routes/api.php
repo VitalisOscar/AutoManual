@@ -13,6 +13,8 @@ Route::prefix('marketplace')
 
     Route::get('', [PublicListingsController::class, 'all']);
 
+    Route::get('seller/{slug}', [PublicListingsController::class, 'bySeller']);
+
     // Single
     Route::prefix('{slug}')
     ->name('.single')

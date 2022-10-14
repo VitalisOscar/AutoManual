@@ -34,13 +34,13 @@ class Seller extends Model
         'user_id',
         'location',
         'logo',
-        'status'
+        'status',
+        'slug'
     ];
 
     protected $with = ['user', 'profile_type'];
 
     protected $appends = [
-        'slug',
         'registered_on',
         'verified',
         'verified_on',
@@ -108,10 +108,6 @@ class Seller extends Model
     function getLogoAttribute($val){
         // We use a placeholder logo for sellers with no logo (Private sellers)
         return asset('storage/' . ($val ?? self::PLACEHOLDER_LOGO));
-    }
-
-    function getSlugAttribute(){
-        return \Illuminate\Support\Str::slug($this->name.' '.$this->id);
     }
 
     function getRegisteredOnAttribute(){

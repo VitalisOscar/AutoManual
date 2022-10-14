@@ -28,10 +28,18 @@ trait CreatesProfiles{
                 ) : null,
                 'user_id' => $user->id,
                 'status' => Seller::STATUS_ACTIVE,
+                'slug' => \Illuminate\Support\Str::slug($data['name'] ?? $user->name),
                 'location' => $data['location'],
             ]);
 
             if(!$seller->id){
+                return Lang::get('errors.unexpected');
+            }
+
+            // Add is to slug
+            $seller->slug .= '-'.$seller->id;
+
+            if(!$seller->save()){
                 return Lang::get('errors.unexpected');
             }
 
