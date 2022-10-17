@@ -17,6 +17,7 @@ class CarImage extends Model
 
     const MAX_IMAGE_COUNT = 12;
     const UPLOAD_DIR = 'cars/images';
+    const MAX_IMAGE_SIZE = 300; // in kb
 
 
     protected $fillable = [

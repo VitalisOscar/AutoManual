@@ -19,7 +19,7 @@ trait ManagesCarImages{
      *
      * @return true|string
      */
-    function uploadMainImage($car, $image_file){
+    private function uploadMainImage($car, $image_file){
         try{
 
             $image = $car->images()->create([
@@ -45,7 +45,7 @@ trait ManagesCarImages{
      *
      * @return true|string
      */
-    function uploadExtraImages($car, $image_files){
+    private function uploadExtraImages($car, $image_files){
         try{
             foreach($image_files as $image){
                 $img = $car->images()->create([
@@ -73,7 +73,7 @@ trait ManagesCarImages{
      *
      * @return string|true
      */
-    function addImages($car, $images){
+    private function addImages($car, $images){
 
         try{
             // check if maximum number of images will be exceeded
@@ -89,7 +89,7 @@ trait ManagesCarImages{
 
             }
 
-            $upload_dir = $this->getCarImageUploadDir();
+            $upload_dir = $this->getUploadDir();
 
             foreach($images as $image_file){
                 $image = $car->images()->create([
@@ -116,27 +116,24 @@ trait ManagesCarImages{
      * @param array $image_ids Ids of images to remove
      * @return string|true
      */
-    function removeImages($car, $image_ids){
+    private function removeImages($car, $image_ids){
 
         try{
 
-            // delete images being removed that belong to the car
-            $car_images = $car->images;
+            // Get the current images
+            $images_to_delete = $car->images()->whereIn('id', $image_ids)->get();
 
-            foreach($car_images as $image){
-
-                // ensure image is not main
+            // Ensure we do not remove current main image
+            foreach($images_to_delete as $image){
                 if($image->is_main){
                     return Lang::get('marketplace::errors.cannot_delete_main_image');
                 }
+            }
 
-                if(in_array($image_ids, $image->id)){
-                    if($image->delete()){
-                        // delete file from disk
-                        Storage::delete(storage_path($image->path));
-                    }else{
-                        return Lang::get('marketplace::errors.images_not_deleted');
-                    }
+            foreach($images_to_delete as $image){
+                if($image->delete()){
+                    // delete file from disk
+                    Storage::delete(storage_path($image->path));
                 }else{
                     return Lang::get('marketplace::errors.images_not_deleted');
                 }
@@ -158,12 +155,12 @@ trait ManagesCarImages{
      *
      * @return string|true
      */
-    function setMainImage($car, $image_id){
+    private function setMainImage($car, $image_id){
 
         try{
 
             // check if the image is already added to car
-            $new_main_image = $car->images()->where('id', $image_id);
+            $new_main_image = $car->images()->whereId($image_id)->first();
 
             if($new_main_image == null){
                 return Lang::get('marketplace::errors.image_does_not_exist');
@@ -196,7 +193,7 @@ trait ManagesCarImages{
      * Get the upload dir, in format upload_dir/yyyy/mm/dd
      * @return string
      */
-    function getUploadDir(){
+    private function getUploadDir(){
         return CarImage::UPLOAD_DIR.'/'.str_replace('-', '/', today()->format('Y-m-d'));
     }
 
