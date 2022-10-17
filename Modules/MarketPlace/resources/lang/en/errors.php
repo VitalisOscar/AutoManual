@@ -23,6 +23,7 @@ return [
 
     // Seller listing errors
     'car_does_not_exist' => 'The car listing does not exist, or action is not allowed',
+    'car_is_not_trashed' => 'The car listing cannot be restored as it has not been deleted',
     'nothing_to_update' => 'No changes have been made. Nothing to update',
 
     // Marketplace erros

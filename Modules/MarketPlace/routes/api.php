@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\MarketPlace\Http\Controllers\Listing\AddCarController;
+use Modules\MarketPlace\Http\Controllers\Listing\CarDeletionController;
 use Modules\MarketPlace\Http\Controllers\Listing\CarImagesController;
 use Modules\MarketPlace\Http\Controllers\Listing\EditCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\ListedCarsController;
@@ -55,6 +56,10 @@ Route::prefix('seller')
             Route::post('images/add', [CarImagesController::class, 'add'])->name('.images.add');
             Route::post('images/remove', [CarImagesController::class, 'delete'])->name('.images.delete');
             Route::post('images/main', [CarImagesController::class, 'updateMain'])->name('.images.update_main');
+
+            // Delete or restore
+            Route::post('delete', [CarDeletionController::class, 'deleteOrTrash'])->name('.delete');
+            Route::post('restore', [CarDeletionController::class, 'restoreTrashed'])->name('.restore');
 
         }); // End single
 

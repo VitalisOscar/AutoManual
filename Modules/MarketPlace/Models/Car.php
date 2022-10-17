@@ -8,10 +8,12 @@ use App\Models\CarModel;
 use App\Models\Category;
 use App\Traits\Misc\FormatedTime;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Seller\Models\Seller;
 
 class Car extends Model
 {
+    use SoftDeletes;
     use FormatedTime;
 
     const MODEL_NAME = "Car";

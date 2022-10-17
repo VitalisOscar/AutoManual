@@ -3,6 +3,7 @@
 namespace Modules\MarketPlace\Repository;
 
 use App\Helpers\ResultSet;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\MarketPlace\Models\Car;
 use Modules\Seller\Models\Seller;
 
@@ -12,6 +13,47 @@ use Modules\Seller\Models\Seller;
 class SellerCarRepository{
 
     use CommonFilters;
+
+    protected $options = [];
+
+    /**
+     * Add a query option
+     *
+     * @param string $option
+     *
+     * @return SellerCarRepository
+     */
+    function addQueryOption($option){
+        array_push($this->options, $option);
+
+        return $this;
+    }
+
+    /**
+     * Add multiple query options
+     *
+     * @param array $options
+     *
+     * @return SellerCarRepository
+     */
+    function addQueryOptions($option){
+        $this->options = array_merge($this->options, $option);
+
+        return $this;
+    }
+
+    /**
+     * @param Builder $query
+     */
+    protected function applyOptions($query){
+        if(in_array('only_trashed', $this->options)){
+            $query->onlyTrashed();
+        }
+
+        if(in_array('with_trashed', $this->options)){
+            $query->withTrashed();
+        }
+    }
 
     /**
      * Get car listings owned by a seller
@@ -64,11 +106,14 @@ class SellerCarRepository{
      * @return Car|null
      */
     function getSingleCar($seller, $car_id){
-        return $seller->cars()
+        $query = $seller->cars()
             ->where(Car::TABLE_NAME.'.id', $car_id)
             ->without(['seller', 'main_image'])
-            ->with('images')
-            ->first();
+            ->with('images');
+
+        $this->applyOptions($query);
+
+        return $query->first();
     }
 
 }
