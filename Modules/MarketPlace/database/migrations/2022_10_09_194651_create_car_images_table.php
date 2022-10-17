@@ -20,7 +20,7 @@ class CreateCarImagesTable extends Migration
 
             $table->string('path');
             $table->boolean('is_main')->index();
-            $table->foreignId('car_id')->constrained(Car::TABLE_NAME);
+            $table->foreignId('car_id')->constrained(Car::TABLE_NAME)->cascadeOnDelete();
 
             $table->dateTime('created_at')->nullable();
             $table->dateTime('updated_at')->nullable();
