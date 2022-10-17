@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\MarketPlace\Http\Controllers\Listing\AddCarController;
+use Modules\MarketPlace\Http\Controllers\Listing\CarImagesController;
 use Modules\MarketPlace\Http\Controllers\Listing\EditCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\ListedCarsController;
 use Modules\MarketPlace\Http\Controllers\MarketPlace\PublicListingsController;
@@ -49,6 +50,11 @@ Route::prefix('seller')
             Route::get('', [ListedCarsController::class, 'single']);
 
             Route::post('edit', [EditCarController::class, 'index'])->name('.edit');
+
+            // Manage Images
+            Route::post('images/add', [CarImagesController::class, 'add'])->name('.images.add');
+            Route::post('images/remove', [CarImagesController::class, 'delete'])->name('.images.delete');
+            Route::post('images/main', [CarImagesController::class, 'updateMain'])->name('.images.update_main');
 
         }); // End single
 
