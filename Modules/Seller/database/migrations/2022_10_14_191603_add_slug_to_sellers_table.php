@@ -14,7 +14,7 @@ class AddSlugToSellersTable extends Migration
      */
     public function up()
     {
-        Schema::table(Seller::MODEL_NAME, function (Blueprint $table) {
+        Schema::table(Seller::TABLE_NAME, function (Blueprint $table) {
             $table->string('slug')->after('status')->unique('unique_slug');
         });
     }
@@ -26,7 +26,7 @@ class AddSlugToSellersTable extends Migration
      */
     public function down()
     {
-        Schema::table(Seller::MODEL_NAME, function (Blueprint $table) {
+        Schema::table(Seller::TABLE_NAME, function (Blueprint $table) {
             $table->dropIndex('unique_slug');
             $table->dropColumn('slug');
         });
