@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Data\CarDataController;
+use Illuminate\Support\Facades\Route;
 use Nwidart\Modules\Facades\Module;
 
 $modules = Module::scan();
@@ -15,3 +17,12 @@ foreach($modules as $module){
         require $routes_path;
     }
 }
+
+Route::prefix('data')
+->name('data')
+->group(function(){
+
+    Route::get('car/options', [CarDataController::class, 'getOptions'])->name('car_options');
+    Route::get('car/models', [CarDataController::class, 'getModels'])->name('car_models');
+
+});
