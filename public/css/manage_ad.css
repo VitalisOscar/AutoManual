@@ -1,0 +1,168 @@
+@import url(../plugins/morris.js/morris.css);
+@import url(new_ad.css);
+
+.categories>.category{
+    padding: .75rem;
+    color: #808080;
+    display: inline-block;
+    text-decoration: none !important;
+    font-weight: 500;
+    border-bottom: 3px solid transparent;
+    transition: .4s all;
+}
+
+.categories .category:not(:last-child){
+    margin-right: .25rem .5rem;
+}
+
+.categories>.category:hover{
+    text-decoration: none !important;
+    border-bottom-color: #f5365c;
+    transition: .4s all;
+}
+
+.categories>.category.active{
+    color: #333;
+    border-bottom-color: #f5365c;
+}
+
+.delete-btn{
+    float: right;
+    margin-left: auto;
+    color: #fa8072;
+    font-size: 1.2em;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+    width: 35px;
+    height: 35px;
+    line-height: 37px;
+    text-align: center;
+    right: -7px;
+}
+
+.delete-btn .overlay{
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.delete-btn:hover .overlay, .delete-btn:focus .overlay{
+    opacity: .1;
+    background: #000;
+    transition: opacity .3s cubic-bezier(.35,0,.25,1),background-color .3s cubic-bezier(.35,0,.25,1);
+}
+
+.chart{
+    height: 250px;
+    min-width: 420px !important;
+}
+
+.chart-wrapper{
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.promote-btn{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    padding: 0 !important;
+    margin: 1rem !important;
+    text-align: center;
+    line-height: 56px;
+    z-index: 5;
+    background-color: rgba(245, 54, 92,.8) !important;
+    color: #fff;
+    box-shadow: 0 .1rem .2rem rgba(0,0,0,.3) !important;
+}
+
+.promote-btn:hover{
+    background-color: #f5365c !important;
+    transform: none;
+}
+
+.table tr:not(:last-child) td, th{
+    border: 1px solid #eaeaea;
+}
+
+.table tr td:first-child, .table tr th:first-child{
+    max-width: 170px !important;
+    border-left: none !important;
+}
+
+.table tr td:last-child, .table tr th:last-child{
+    border-right: none !important;
+}
+
+.table tr:first-child th{
+    border-top: none !important;
+}
+
+.table tr:last-child td:not(.no-enquiries){
+    padding: .5rem;
+}
+
+.table{
+    font-size: .93em;
+}
+
+.table .btn:hover, .table .btn:focus{
+    transform: none !important;
+}
+
+.enquiry-txt{
+    
+}
+
+  #next-btn, #prev-btn{
+    display: none;
+  }
+
+  @media(max-width:290px){
+    .get-more-leads .media{
+        display: block;
+        text-align: center;
+    }
+
+    .get-more-leads .media>div{
+        margin-left: 0 !important;
+        margin-top: .75rem;
+    }
+
+    .get-more-leads .media>div>div:not(:last-child){
+        text-align: left;
+    }
+    
+    .categories>.category{
+        display: block;
+        border-bottom: 1px solid #ddd !important;
+        border-left: 3px solid transparent;
+        transition: .4s all;
+    }
+
+    .categories>.category.active{
+        color: #333;
+        border-left-color: #f5365c;
+    }
+
+    .categories>.category:hover{
+        text-decoration: none !important;
+        border-left-color: #f5365c;
+        transition: .4s all;
+    }
+}
+
+@media(min-width:768px){
+    .chart{
+        height: 310px;
+    }
+}

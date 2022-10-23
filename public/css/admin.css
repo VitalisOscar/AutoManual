@@ -1,0 +1,23 @@
+body{
+    background: #e2e4e6;
+}
+
+.sidebar{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 240px;
+    background: #fff;
+    border-right: 1px solid #ddd;
+}
+
+.main-content{
+    margin-left: 240px;
+}
+
+.header{
+    background: #fff;
+    height: 60px;
+    border-bottom: 1px solid #ddd;
+}

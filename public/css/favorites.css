@@ -1,0 +1,19 @@
+@media(min-width:768px){
+    .square-ad{
+        width: 50% !important;
+    }
+
+    .square-ad article .img{
+        padding-top: 56.25% !important;
+    }
+}
+
+@media(min-width:992px){
+    .square-ad{
+        width: 33.3333% !important;
+    }
+
+    .square-ad article .img{
+        padding-top: 67% !important;
+    }
+}

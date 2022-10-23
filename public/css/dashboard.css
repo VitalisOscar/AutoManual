@@ -1,0 +1,78 @@
+body{
+    background: #f0f2f4;
+}
+
+.avatar{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto .4rem;
+}
+
+.user-nav a{
+    display: block;
+    padding: .4rem .5rem;
+    border-radius: .3rem;
+    display: flex;
+    align-items: center;
+    margin-bottom: .5rem;
+}
+
+.user-nav a i:first-child{
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+    margin-right: .5rem;
+    font-size: .8em;
+}
+
+.user-nav a span{
+    color: #333;
+    font-size: 17px;
+}
+
+.user-nav a i:last-child{
+    color: #8988aa;
+    float: right;
+    margin-left: auto;
+}
+
+.user-nav a:hover span, .user-nav a.active span{
+    color: #007bff;
+}
+
+.user-nav a.active i:last-child{
+    color: #333; 
+    font-weight: 500;
+}
+
+.user-nav-aside{
+    border-right: 2px solid #ddd;
+}
+
+.seller-logo{
+    height: 40px;
+}
+
+.hoverable{
+    position: relative;
+}
+
+.hoverable .action-overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0);
+    cursor: pointer;
+    
+}
+
+.hoverable:hover .action-overlay{
+    background: rgba(0,0,0,.6);
+}

@@ -1,0 +1,120 @@
+@import url(ad.css);
+
+.categories>.category{
+    padding: .75rem;
+    color: #808080;
+    display: inline-block;
+    text-decoration: none !important;
+    font-weight: 500;
+    border-bottom: 3px solid transparent;
+    transition: .4s all;
+}
+
+.categories .category:not(:last-child){
+    margin-right: .25rem .5rem;
+}
+
+.categories>.category:hover{
+    text-decoration: none !important;
+    border-bottom-color: #f5365c;
+    transition: .4s all;
+}
+
+.categories>.category.active{
+    color: #333;
+    border-bottom-color: #f5365c;
+}
+
+.main-content .input-group{
+    background-color: #fcfcfc;
+    transition: .4s background-color !important;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+}
+
+.main-content .input-group .btn, .main-content .input-group .form-control{
+    
+    padding: .25rem .5rem;
+    border-radius: .25rem 0 0 .25rem !important;
+}
+
+.main-content .input-group .btn{
+    font-size: .95em !important;
+    text-transform: none !important;
+    font-weight: 400 !important;
+    border-radius: 0 .25rem .25rem 0 !important;
+}
+
+.main-content .input-group:focus-within{
+    background-color: #fff;
+    transition: .4s background-color !important;
+    box-shadow: none !important;
+}
+
+.main-content .input-group .form-control{
+    border-color: transparent !important;
+    border-width: 2px !important;
+    border-style: solid;
+}
+
+.main-content .input-group .form-control{
+    border-radius: .3rem 0 0 .3rem;
+    transition: .4s all !important;
+    background-color: transparent;
+    border-right-color: transparent !important;
+}
+
+.main-content .form-control:focus{
+    border-color: #4285f4 !important;
+    transition: .4s all !important;
+    border-right-color: transparent !important;
+    border-right-width: 0px !important;
+}
+
+.main-content .form-control{
+    color: #333 !important;
+}
+
+.main-content .form-control::placeholder, .form-control:focus::placeholder{
+    color: #495057;
+}
+
+@media(max-width:400px){
+    
+    .categories>.category{
+        display: block;
+        border-bottom: 1px solid #ddd !important;
+        border-left: 3px solid transparent;
+        transition: .4s all;
+    }
+
+    .categories>.category.active{
+        color: #333;
+        border-left-color: #f5365c;
+    }
+
+    .categories>.category:hover{
+        text-decoration: none !important;
+        border-left-color: #f5365c;
+        transition: .4s all;
+    }
+}
+
+@media(min-width:768px){
+    .square-ad.user-ad{
+        width: 50% !important;
+    }
+
+    .square-ad.user-ad article .img{
+        padding-top: 56.25% !important;
+    }
+}
+
+@media(min-width:992px){
+    .square-ad.user-ad{
+        width: 33.3333% !important;
+    }
+
+    .square-ad.user-ad article .img{
+        padding-top: 67% !important;
+    }
+}

@@ -4,7 +4,7 @@ const UserContext = React.createContext();
 
 function UserProvider({ children }){
     // Tracking the logged in user
-    const [currentUser, setCurrentUser] = useState(null)
+    const [currentUser, setCurrentUser] = useState({})
 
     // Fetch the current user info
     // TODO

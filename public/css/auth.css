@@ -1,0 +1,191 @@
+body{background-color: #eee;
+    min-height: 100vh; display: flex; display: -webkit-flex; align-items: center;
+}
+body>*{
+    width: 100% !important;
+}
+.main-content .input-group{
+    background-color: #efefef;
+    transition: .4s all !important;
+}
+
+.main-content .input-group:focus-within{
+    background-color: #fff;
+    transition: .4s all !important;
+}
+
+.main-content .input-group>*{
+    border-color: #efefef !important;
+    border-width: 2px !important;
+    border-style: solid;
+}
+
+.main-content .input-group .input-group-prepend{
+    border-right: none;
+    border-radius: .3rem 0 0 .3rem;
+    transition: .4s all !important;
+    background-color: transparent;
+}
+
+.main-content .input-group .input-group-append{
+    border-left: none;
+    transition: .4s all !important;
+    background-color: transparent;
+}
+
+.main-content .input-group .form-control{
+    transition: .4s all !important;
+    background-color: transparent;
+}
+
+.main-content .input-group>*:last-child{
+    border-radius: 0 .3rem .3rem 0;
+}
+
+.main-content .input-group:focus-within .form-control{
+    border-color: #4285f4 !important;
+    transition: .4s all !important;
+}
+
+.main-content .input-group:focus-within .input-group-prepend{
+    border-color: #4285f4 !important;
+    transition: .4s all !important;
+}
+
+.main-content .input-group:focus-within .input-group-append{
+    border-color: #4285f4 !important;
+    transition: .4s all !important;
+}
+
+.main-content .input-group .input-group-text i{
+    color: #8988aa;
+    transition: .4s all;
+}
+
+.main-content .input-group:focus-within .input-group-text i{
+    color: #495057;
+    transition: .4s all;
+}
+
+.main-content .input-group .input-group-text{
+    border: none;
+    background-color: transparent;
+}
+
+.main-content .form-control{
+    color: #333 !important;
+}
+
+.main-content .form-control::placeholder, .form-control:focus::placeholder{
+    color: #495057;
+}
+
+.pass-toggle i{
+    cursor: pointer;
+    color: #333 !important;
+    transition: .4s all;
+}
+
+.main-content .form-group label{
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+.auth-card{
+    border-radius: .3rem;
+    max-width: 320px;
+    background: #fff;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+}
+
+.logo img{
+    height: 30px;
+}
+
+.auth-wrap .logo-wrap{
+    display: none !important;
+}
+
+.signup-card{
+    background: #fff;
+    border-radius: 0 .3rem .3rem 0;
+}
+
+.signup-bg{
+    background:url(../img/hero-bg.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-wrap{
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.3);
+    border-radius: .3rem;
+}
+
+@media(min-width:370px){
+    .c6{
+        width: 50% !important;
+    }
+}
+
+@media(min-width:450px){
+    .cx6{
+        width: 50% !important;
+    }
+}
+
+@media(max-width:768px){
+    .auth-wrap{
+        max-width: 450px !important;
+        margin: auto !important;
+    }
+
+    .signup-bg{
+        display: none;
+    }
+
+    .signup-card{
+        border-radius: .3rem !important;
+    }
+
+    .btn-submit{
+        display: block !important;
+        width: 100% !important;
+    }
+}
+
+@media(max-width:550px){
+
+    .signup-card{
+        padding: 1rem 5px !important;
+    }
+    
+    .auth-card, .auth-wrap{
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .logo img{
+        height: 40px;
+    }
+
+    .auth-wrap .logo-wrap{
+        display: block !important;
+    }
+
+    .top{
+        border-bottom: none !important;
+    }
+
+    .auth-card>div{
+        padding: 15px !important;
+    }
+
+    body{
+        background: #fff !important;
+        min-height: 80vh !important;
+    }
+}
