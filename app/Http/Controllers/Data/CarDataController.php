@@ -7,6 +7,7 @@ use App\Models\BodyType;
 use App\Models\CarMake;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Modules\MarketPlace\Models\Car;
 
 class CarDataController extends Controller
 {
@@ -17,6 +18,8 @@ class CarDataController extends Controller
                 'body_types' => BodyType::all(),
                 'categories' => Category::all(),
                 'car_makes' => CarMake::all(),
+                'transmissions' => Car::TRANSMISSIONS,
+                'fuel_types' => Car::FUEL_TYPES,
             ]
         );
     }
