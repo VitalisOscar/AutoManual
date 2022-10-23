@@ -30,8 +30,30 @@ const useApplyCarFilters = (url, filters) => {
 
     // Check if filters are provided
     // Car filters
-    if(filters.body_type !== "") params.push("body_type=" + filters.body_type)
-    if(filters.category !== "") params.push("category=" + filters.category)
+    if(filters.body_types){
+        filters.body_types.forEach((val) => {
+            params.push("body_type[]=" + val)
+        })
+    }
+
+    if(filters.categories){
+        filters.categories.forEach((val) => {
+            params.push("category[]=" + val)
+        })
+    }
+
+    if(filters.transmissions){
+        filters.transmissions.forEach((val) => {
+            params.push("transmission[]=" + val)
+        })
+    }
+
+    if(filters.fuel_types){
+        filters.fuel_types.forEach((val) => {
+            params.push("fuel_type[]=" + val)
+        })
+    }
+
     if(filters.car_make !== "") params.push("make=" + filters.car_make)
     if(filters.car_model !== "") params.push("model=" + filters.car_model)
 

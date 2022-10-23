@@ -214,17 +214,17 @@ body.filters-aside-open{
     overflow-y: hidden;
 }
 
-body.filters-aside-open .filters-aside{
+.filters-aside.shown{
     width: 100%;
 }
 
-body.filters-aside-open .filters-aside>div{
+.filters-aside.shown>div{
     opacity: 1;
     width: 250px;
     transition: .4s all;
 }
 
-body.filters-aside-open .filters-header{
+.filters-aside.shown .filters-header{
     display: flex !important;
 }
 
@@ -235,7 +235,7 @@ body.filters-aside-open .filters-header{
 }
 
 @media(max-width: 350px){
-    body.filters-aside-open .filters-aside>div{
+    .filters-aside.shown>div{
         width: 100%;
         transition: .4s all;
     }

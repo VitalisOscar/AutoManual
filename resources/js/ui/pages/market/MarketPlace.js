@@ -1,8 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
 import { CarDataContext } from '../../../context/car_data';
 import { useApplyCarFilters } from '../../../hooks/car';
+import { APP_ROUTES } from '../../../routes';
 import Listing from '../../components/Listing';
+import MarketFilters from '../../components/MarketFilters';
 
 function MarketPlace() {
 
@@ -11,7 +14,14 @@ function MarketPlace() {
 
     const [loading, setLoading] = useState(false) // Whether results are being fetched at the moment
 
+    const [filtersShown, setFiltersShown] = useState(false) // Controls display of filters on small screens
+
     const [filters, setFilters] = useState({
+        keyword: "",
+        year_from: "",
+        year_to: "",
+        price_from: "",
+        price_to: "",
         car_make: "",
         car_model: "",
         category: "",
@@ -22,20 +32,14 @@ function MarketPlace() {
 
     }) // Filters in use for latest request
 
-    // Options we can use to filter
-    const carOptions = useContext(CarDataContext)
 
-    // Models for selected car make
-    const [car_models, setCarModels] = useState([])
-    const [modelsLoading, setModelsLoading] = useState(false)
-
-
-    // DESIRED EFFECTS
     // We'll fetch results when filters are updated
     useEffect(fetchResults, [filters])
 
-    // We shall fetch car models when car make filter changes
-    useEffect(fetchCarModels, [filters.car_make])
+
+    // Page header may be different
+    // e.g depending on filters
+    var page_header = "Cars for sale"
 
 
 
@@ -65,127 +69,180 @@ function MarketPlace() {
             })
     }
 
-    function fetchCarModels(){
-        setCarModels([])
-
-        if(filters.car_make !== ""){
-            setModelsLoading(true)
-
-            fetch(getApiUrl(API_ENDPOINTS.GET_CAR_MODELS) + "?make=" + filters.car_make)
-                .then(response => response.json())
-                .then(response => {
-                    setModelsLoading(false)
-
-                    if(response.success){
-                        // Models are at data
-                        setCarModels(response.data)
-                    }
-                })
-        }
-    }
-
 
     // DOM EVENT HANDLERS
-    // Filter change handlers
-    function handleCarMakeChange(event){
-        setFilters({ ...filters, car_make: event.target.value })
-    }
-
-    function handleCarModelChange(event){
-        setFilters({ ...filters, car_model: event.target.value })
-    }
-
-    function handleCategoryChange(event){
-        setFilters({ ...filters, category: event.target.value })
-    }
-
-    function handleBodyTypeChange(event){
-        setFilters({ ...filters, body_type: event.target.value })
-    }
-
     function handleSortChange(event){
         setFilters({ ...filters, sort: event.target.value })
     }
 
+
+    function receiveFilters(filters){
+        setFilters(filters) // Update our filters
+        setFiltersShown(false) // Hide if displayed on small screen
+    }
 
 
     // MAPPINGS
     // Map each car item to a Listing component
     const listingList = results.items ? results.items.map((car) => {
         return <Listing car={car} key={car.id} />
-    }) : 'No listings'
+    }) : ''
+    
 
-
-    // Map our filters
-    const car_make_filters = carOptions.car_makes.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
-    const car_model_filters = car_models.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
-    const category_filters = carOptions.categories.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
-    const body_type_filters = carOptions.body_types.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
-
-
+    const filtersComponent = <MarketFilters onSubmitted={receiveFilters} />
 
     return (
-        <div>
-            <h3>Buy Cars</h3>
+        <>
+            {/* SMALL SCREEN FILTERS */}
+            <div className={"filters-aside filters d-lg-none" + (filtersShown ? " shown":"")} onClick={(e) => { if(e.target.classList.contains('filters')){ setFiltersShown(false) }}}>
+                <div>
+            
+                    <div className="bg-default p-3 text-white d-flex align-items-center filters-header">
+                        <h5 className="my-0 text-white float-left">
+                            <i className="fa fa-fw fa-filter"></i>
+                            <span className="font-weight-500">Refine Results</span>
+                        </h5>
 
-            <div>
-                <h5>Filters</h5>
-
-                <form>
-
-                    <div>
-                        Category:
-                        <select value={filters.category} onChange={handleCategoryChange}>
-                            <option value="">All</option>
-                            {category_filters}
-                        </select>
+                        <span className="close float-right ml-auto" onClick={() => setFiltersShown(false)}>
+                            <i className="fa fa-times text-white"></i>
+                        </span>
+                        <div className="clearfix"></div>
                     </div>
 
-                    <div>
-                        Body:
-                        <select value={filters.body_type} onChange={handleBodyTypeChange}>
-                            <option value="">All</option>
-                            {body_type_filters}
-                        </select>
-                    </div>
+                    {filtersComponent}
 
-                    <div>
-                        Make:
-                        <select value={filters.car_make} onChange={handleCarMakeChange}>
-                            <option value="">All</option>
-                            {car_make_filters}
-                        </select>
-                    </div>
-
-                    <div>
-                        Model:
-                        <select value={filters.car_model} onChange={handleCarModelChange}>
-                            <option value="">{modelsLoading ? "Loading..." : "All"}</option>
-                            {car_model_filters}
-                        </select>
-                    </div>
-
-                    <div>
-                        Sort:
-                        <select value={filters.sort} onChange={handleSortChange}>
-                            <option value="">Most Recent</option>
-                            <option value="oldest">Oldest</option>
-                            <option value="atoz">Title (A to Z)</option>
-                            <option value="ztoa">Title (Z to A)</option>
-                        </select>
-                    </div>
-
-                </form>
+                </div>
             </div>
 
-            {loading ? <span>Loading...</span> : <span>Results</span>}
 
-            {listingList}
+            {/* MAIN CONTAINER */}
+            <div className="container py-5">
 
-            <div>
-                Page {results.page} of {results.max_pages}
+                <div className="row">
+                    {/* FILTERS SECTION */}
+                    <div className="col-lg-3 d-none d-lg-block">
+
+                        <div className="sticky-top">
+                            <div className="filters mb-4">
+
+                                <div className="card shadow-none border-primary">
+
+                                    <div className="card-header bg-purple text-white">
+                                        <h5 className="my-0 text-white">
+                                            <i className="fa fa-fw fa-filter"></i>
+                                            <span className="font-weight-500">Refine Results</span>
+                                        </h5>
+                                    </div>
+
+                                    {filtersComponent}
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    {/* END FILTERS SECTION */}
+
+
+                    {/* LISTINGS SECTION */}
+                    <div className="col-md-12 col-lg-9 results">
+
+                        {/* TOP PART - HEADER AND SORTING */}
+                        <div className="mb-4 section-top">
+
+                            <div className="d-md-flex align-items-center">
+                                <div className="float-md-left mr-md-auto mb-3 mb-md-0">
+                                    <h1 className="h2 font-weight-bold mb-0">
+                                        {page_header}
+                                    </h1>
+                                </div>
+
+                                <div className="float-md-right ml-md-auto d-flex align-items-center">
+                                    <button className="btn btn-outline-warning btn-sm px-3 shadow-none create-alert-btn" data-toggle="modal" data-target="#new-alert">
+                                        <i className="fa fa-bell mr-1"></i>Create Alert
+                                    </button>
+
+                                    <button onClick={() => setFiltersShown(true)} className="btn btn-primary btn-sm py-2 px-3 shadow-none d-lg-none open-filters">
+                                        <i className="fa fa-filter mr-1"></i>Filters
+                                    </button>
+
+                                    <div className="d-flex align-items-center float-right ml-auto">
+                                        <select value={filters.sort} className="form-control custom-select-sm custom-select order-by" onChange={handleSortChange}>
+                                            <option value="">Most Recent</option>
+                                            <option value="oldest">Oldest First</option>
+                                            <option value="atoz">Title (A to Z)</option>
+                                            <option value="ztoa">Title (Z to A)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div className="clearfix"></div>
+                            </div>
+
+                            <button className="create-alert btn btn-warning" title="Create Alert">
+                                <i className="fa fa-bell"></i>
+                            </button>
+                        </div>
+                        {/* END RESULTS TOP PART */}
+
+
+                        {/* LISTINGS PART */}
+
+                        {
+                            loading ?
+                                // LOADER
+                                <span>Loading...</span>
+                                :
+                                // LISTINGS LIST
+                                (
+                                    results.total === 0 ?
+                                        // NO RESULTS
+                                        <div className="row mb-4">
+                                            <div className="col-12">
+                                                <div className="lead text-center mx-auto">
+                                                    <div className="d-inline-block p-3 text-center text-danger mx-auto">
+                                                        <i className="fa fa-warning fa-5x"></i>
+                                                    </div>
+                                                    <br/>
+                                                    <h1 className="text-center mb-4 text13">No Results</h1>
+
+                                                    <div className="text-left">
+                                                        <div>
+                                                            Unfortunately, your search returned zero listings. Here are things you can try:
+                                                        </div>
+
+                                                        <ul>
+                                                            <li className="mb-1">Change your filters</li>
+                                                            <li className="mb-1">
+                                                                <div>Create an alert (We'll notify you when a matching car is listed)</div>
+                                                                <Link to={APP_ROUTES.ALERTS} className="btn btn-outline-warning btn-sm">Create an Alert</Link>
+                                                            </li>
+                                                            <li className="mb-1">Check back later</li>
+                                                        </ul>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        :
+                                        <div>
+                                            {listingList}
+                                        </div>
+                                )
+                        }
+
+                        {/* END LISTINGS PART */}
+
+                    </div>
+                    {/* END LISTINGS SECTION */}
+
+                </div>
             </div>
-        </div>
+
+        </>
     );
 }
 

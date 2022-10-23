@@ -8,6 +8,8 @@ function CarDataProvider({ children }){
         car_makes: [],
         categories: [],
         body_types: [],
+        transmissions: [],
+        fuel_types: [],
     })
 
     useCarDataOptions(setCarData)
