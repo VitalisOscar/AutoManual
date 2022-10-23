@@ -1,31 +1,31 @@
 
-article.ad{
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+.ad{
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     margin-bottom: 1.5rem;
 }
 
-article.ad .card{
+.ad .card{
     border: none;
 }
 
-article.ad:hover{
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.6);
+.ad:hover{
+    box-shadow: 0 0 6px 0 rgba(0,0,0,.6);
 }
 
-article.ad.featured, .square-ad article.featured{
+.ad.featured, .square-ad article.featured{
     box-shadow: 0 .125rem .25rem rgba(251, 99, 64, .7);
 }
 
-article.ad.featured:hover, .square-ad article.featured:hover{
+.ad.featured:hover, .square-ad article.featured:hover{
     box-shadow: 0 3px 9px 1px rgba(251, 99, 64,.9);
 }
 
-article.ad .top-badge, .square-ad article .top-badge{
+.ad .top-badge, .square-ad article .top-badge{
     display: none;
 }
 
-article.ad.featured .top-badge, .square-ad article.featured .top-badge{
+.ad.featured .top-badge, .square-ad article.featured .top-badge{
     display: inline-block;
     position: absolute;
     top: 0;
@@ -34,7 +34,7 @@ article.ad.featured .top-badge, .square-ad article.featured .top-badge{
     z-index: 2;
 }
 
-article.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
+.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
     font-size: 1.3em;
     color: #ff7f50;
 }
@@ -88,7 +88,7 @@ article.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
     align-items: center;
 }
 
-.ad .title h5,.ad .title-top h5{
+.ad .title .listing-title,.ad .title-top .listing-title{
     font-weight: 500;
     float: left;
     white-space: nowrap;
@@ -97,7 +97,7 @@ article.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
     text-overflow: ellipsis;
 }
 
-.ad .title h5 a,.ad .title-top h5 a{
+.ad .title .listing-title a,.ad .title-top .listing-title a{
     color: inherit;
 }
 
@@ -373,7 +373,7 @@ article.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
         position: relative;
         height: 100%;
     }
-    
+
     .ad .relative .btn{
         position: absolute;
         bottom: 0;
