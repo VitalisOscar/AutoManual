@@ -20,6 +20,7 @@ class CarMakeSeeder extends Seeder
             if(CarMake::where('name', $name)->first() == null){
                 CarMake::create([
                     'name' => $name,
+                    'slug' => \Illuminate\Support\STr::slug($name)
                 ]);
             }
         }

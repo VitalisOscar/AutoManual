@@ -13,7 +13,7 @@ class Category extends Model
     protected $table = "app_categories";
 
     protected $fillable = [
-        'name'
+        'name', 'slug'
     ];
 
     protected $hidden = [

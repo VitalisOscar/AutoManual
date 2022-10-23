@@ -13,7 +13,7 @@ class CarModel extends Model
     protected $table = "app_car_models";
 
     protected $fillable = [
-        'name', 'car_make_id'
+        'name', 'car_make_id', 'slug'
     ];
 
     protected $hidden = [

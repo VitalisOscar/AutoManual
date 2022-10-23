@@ -20,6 +20,7 @@ class BodyTypeSeeder extends Seeder
             if(BodyType::where('name', $name)->first() == null){
                 BodyType::create([
                     'name' => $name,
+                    'slug' => \Illuminate\Support\STr::slug($name)
                 ]);
             }
         }

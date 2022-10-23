@@ -45,7 +45,8 @@ class CarModelSeeder extends Seeder
 
                     CarModel::create([
                         'name' => $model,
-                        'car_make_id' => $db_make->id
+                        'car_make_id' => $db_make->id,
+                        'slug' => \Illuminate\Support\STr::slug($model)
                     ]);
                 }
             }

@@ -14,12 +14,13 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $names = ['Brand New', 'Locally Used', 'Foreign Used', 'Import'];
+        $names = ['Brand New', 'Locally Used', 'Foreign Used', 'Imports'];
 
         foreach($names as $name){
             if(Category::where('name', $name)->first() == null){
                 Category::create([
                     'name' => $name,
+                    'slug' => \Illuminate\Support\STr::slug($name)
                 ]);
             }
         }

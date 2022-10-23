@@ -14,7 +14,7 @@ class BodyType extends Model
     protected $table = "app_body_types";
 
     protected $fillable = [
-        'name'
+        'name', 'slug'
     ];
 
     protected $hidden = [
