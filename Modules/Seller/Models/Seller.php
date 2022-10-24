@@ -40,16 +40,21 @@ class Seller extends Model
 
     protected $with = ['user', 'profile_type'];
 
+    protected $withCount = ['approved_cars'];
+
     protected $appends = [
+        'total_approved_cars',
         'registered_on',
         'verified',
         'verified_on',
+        'phone',
+        'email'
     ];
 
     protected $hidden = [
         'created_at', 'updated_at',
         'verified_at', 'user_id',
-        'profile_type_id'
+        'profile_type_id', 'approved_cars_count'
     ];
 
     protected $casts = [
@@ -66,6 +71,8 @@ class Seller extends Model
     function profile_type(){ return $this->belongsTo(ProfileType::class, 'profile_type_id'); }
 
     function cars(){ return $this->hasMany(Car::class, 'seller_id'); }
+
+    function approved_cars(){ return $this->cars()->approved(); }
 
 
     // Scopes
@@ -123,6 +130,18 @@ class Seller extends Model
             $this->prettyDate($this->verified_at) : 'Not Verified';
     }
 
+    function getTotalApprovedCarsAttribute(){
+        return $this->approved_cars_count;
+    }
+
+    function getEmailAttribute(){
+        return $this->user->email;
+    }
+
+    function getPhoneAttribute(){
+        return $this->user->phone;
+    }
+
 
     // helpers
     function isActive(){
@@ -153,10 +172,5 @@ class Seller extends Model
     // IsProfile
     function getProfileType(){
         return self::MODEL_NAME;
-    }
-
-    // SmsRecepient
-    function getSmsPhoneNumber(){
-        return $this->user->phone;
     }
 }

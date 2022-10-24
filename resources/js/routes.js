@@ -22,6 +22,10 @@ const APP_ROUTES = {
     SELLER_REGISTRATION: '/seller/register',
     VIEW_ADS: '/ads',
     CREATE_AD: '/new-ad',
+
+    // INFO
+    TERMS: '/terms',
+    PRIVACY_POLICY: '/privacy-policy',
 }
 
 /**

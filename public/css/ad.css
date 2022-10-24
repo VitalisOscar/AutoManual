@@ -162,21 +162,21 @@
 }
 
 
-.ad .seller{
+.seller{
     display: inline-block;
 }
 
-.ad .seller .seller-logo{
+.seller .seller-logo{
     height: 80px;
     width: auto;
 }
 
-.ad .seller .verified-seller{
+.seller .verified-seller{
     border: 1px solid #ccc;
     border-radius: 25px;
 }
 
-.ad .seller .verified-seller img{
+.seller .verified-seller img{
     height: 30px;
 }
 

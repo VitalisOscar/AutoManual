@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { APP_ROUTES, getAppRoute } from '../../routes';
 
 function Listing({ car }) {
+    function addFavorite(){
+        // TODO add favorite functionality
+    }
+
     return (
         <div className="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12 ad-wrap">
             <div className="ad">
@@ -20,7 +24,7 @@ function Listing({ car }) {
                                             {car.title}
                                         </Link>
                                     </h5>
-                                    <span className="fav-btn" data-toggle="tooltip" title="Add to Favorites">
+                                    <span className="fav-btn" data-toggle="tooltip" onClick={addFavorite} title="Add to Favorites">
                                         <i className="fa fa-heart-o"></i>
                                         <span className="overlay"></span>
                                     </span>
@@ -53,7 +57,7 @@ function Listing({ car }) {
                                         </Link>
                                     </h4>
 
-                                    <span className="fav-btn" title="Add to Favorites">
+                                    <span className="fav-btn" title="Add to Favorites" onClick={addFavorite}>
                                         <i className="fa fa-heart-o"></i>
                                         <span className="overlay"></span>
                                     </span>
@@ -106,17 +110,24 @@ function Listing({ car }) {
                                     {/* PRICING AND SELLER */}
                                     <h4 className="car-price text-dark mb-2">{car.price}</h4>
 
-                                    <div class="seller mb-3">
-                                        <Link to="" title={"More by " + car.seller.name} className="d-inline-block mb-1">
-                                            <img src={car.seller.logo} alt={car.seller.name} class="seller-logo" />
+                                    <div className="seller mb-3">
+                                        <Link to={
+                                                getAppRoute(APP_ROUTES.MARKET_SELLER_PAGE, {
+                                                    slug: car.seller.slug
+                                                })
+                                            }
+                                            title={"More by " + car.seller.name}
+                                            className="d-inline-block mb-1"
+                                        >
+                                            <img src={car.seller.logo} alt={car.seller.name} className="seller-logo" />
                                         </Link>
 
                                         {/* VERIFICATION STATUS */}
                                         {
                                             car.seller.verified ?
-                                                <div class="verified-seller d-flex align-items-center pl-3" title="The seller has been verified by AutoManual">
-                                                    <strong class="text-success">Verified</strong>
-                                                    <img src="/img/icons/verified.png" alt="Verified Seller" class="ml-auto mr-0 d-inline-block"/>
+                                                <div className="verified-seller d-flex align-items-center pl-3" title="The seller has been verified by AutoManual">
+                                                    <strong className="text-success">Verified</strong>
+                                                    <img src="/img/icons/verified.png" alt="Verified Seller" className="ml-auto mr-0 d-inline-block"/>
                                                 </div>
                                             :
                                                 ''

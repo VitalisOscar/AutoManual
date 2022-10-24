@@ -45,7 +45,7 @@ body{
 .images{
     position: relative;
     display: block;
-    overflow: hidden; 
+    overflow: hidden;
     width: 100%;
     padding: 0;
     padding-top: 75%;
@@ -299,10 +299,14 @@ textarea.form-control:focus{
     font-size: .94em;
 }
 
-.share-links a{
+.share-links a,
+.share-links button{
     width: 45px;
     height: 45px;
     line-height: 45px;
+    border:none;
+    outline: none;
+    cursor: pointer;
     text-align: center;
     font-size: 1.2em;
     color: #fff;
@@ -310,12 +314,13 @@ textarea.form-control:focus{
     border-radius: 50%;
 }
 
-.share-links a:not(:last-child){
+.share-links a:not(:last-child),
+.share-links button:not(:last-child){
     margin-right: 5px;
 }
 
 @media(max-width:576px){
-    
+
     .container .ad-info{
         padding: 0px;
     }
@@ -375,13 +380,13 @@ textarea.form-control:focus{
     .btn-report{
         display: block;
         width: 100%;
-        border-color: #f5365c; 
+        border-color: #f5365c;
         background-color: transparent;
     }
 
     .btn-report:hover, .btn-report:focus{
         color: #fff !important;
-        border-color: #f5365c; 
+        border-color: #f5365c;
         background-color: #f5365c;
     }
 
