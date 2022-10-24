@@ -4,13 +4,21 @@ import { API_ENDPOINTS, getApiUrl } from "../api";
 /**
  * Fetches car data options such as makes, categories, body types etc
  */
-const useCarDataOptions = (onLoaded) => {
+const useCarDataOptions = () => {
+    const [data, setCarData] = useState({
+        car_makes: [],
+        categories: [],
+        body_types: [],
+        transmissions: [],
+        fuel_types: [],
+    })
+
     useEffect(() => {
         fetch(getApiUrl(API_ENDPOINTS.GET_CAR_DATA_OPTIONS))
             .then(response => response.json())
             .then((response) => {
                 if(response.success){
-                    onLoaded(response.data)
+                    setCarData(response.data)
                 }else{
                     console.log("ERROR: ", response.message)
                 }
@@ -19,7 +27,9 @@ const useCarDataOptions = (onLoaded) => {
                 console.log(error)
             })
 
-    }, [onLoaded])
+    }, [])
+
+    return data
 }
 
 /**
