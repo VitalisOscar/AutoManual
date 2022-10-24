@@ -114,7 +114,7 @@ function Header() {
                             {categoryLinks}
 
                             <div className="dropdown">
-                                <Link to={APP_ROUTES.ACCOUNT} className="btn btn-outline-white py-2 mr-1" data-toggle="dropdown">Account<i className="fa fa-caret-down ml-1"></i></Link>
+                                <a className="btn btn-outline-white py-2 mr-1" data-toggle="dropdown">Account<i className="fa fa-caret-down ml-1"></i></a>
 
                                 <ul className="dropdown-menu account-options">
                                     {userLinks}
