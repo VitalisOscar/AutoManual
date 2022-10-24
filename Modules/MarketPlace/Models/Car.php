@@ -154,7 +154,7 @@ class Car extends Model
     }
 
     function getPriceAttribute($val){
-        return number_format($val);
+        return 'KES '.number_format($val);
     }
 
     function getDriveTypeAttribute($val){
