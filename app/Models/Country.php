@@ -6,6 +6,7 @@ use App\Traits\Misc\FormatedTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Account\Models\User;
+use Propaganistas\LaravelPhone\PhoneNumber;
 
 class Country extends Model
 {
@@ -20,14 +21,11 @@ class Country extends Model
     protected $fillable = [
         'name',
         'code',
+        'phone_code',
     ];
 
     protected $hidden = [
         'created_at', 'updated_at', 'deleted_at'
-    ];
-
-    protected $appends = [
-        'added'
     ];
 
     protected $casts = [

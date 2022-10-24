@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Data\CarDataController;
+use App\Http\Controllers\Data\CountriesDataController;
 use Illuminate\Support\Facades\Route;
 use Nwidart\Modules\Facades\Module;
 
@@ -24,5 +25,7 @@ Route::prefix('data')
 
     Route::get('car/options', [CarDataController::class, 'getOptions'])->name('car_options');
     Route::get('car/models', [CarDataController::class, 'getModels'])->name('car_models');
+
+    Route::get('countries', [CountriesDataController::class, 'getCountries'])->name('countries');
 
 });
