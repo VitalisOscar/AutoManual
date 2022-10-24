@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../api';
 import { CarDataContext } from '../../context/car_data';
-import { APP_ROUTES, getAppRoute } from '../../routes';
 
 function MarketFilters({ showCategories=true, onSubmitted }) {
     const [filters, setFilters] = useState({

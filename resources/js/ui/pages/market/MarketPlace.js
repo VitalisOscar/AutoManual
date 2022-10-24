@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
-import { CarDataContext } from '../../../context/car_data';
 import { useApplyCarFilters } from '../../../hooks/car';
 import { APP_ROUTES } from '../../../routes';
 import Listing from '../../components/Listing';
@@ -16,6 +15,7 @@ function MarketPlace() {
 
     const [filtersShown, setFiltersShown] = useState(false) // Controls display of filters on small screens
 
+    // TODO get default filter values from url
     const [filters, setFilters] = useState({
         keyword: "",
         year_from: "",
@@ -76,8 +76,10 @@ function MarketPlace() {
     }
 
 
-    function receiveFilters(filters){
-        setFilters(filters) // Update our filters
+    function receiveFilters(latestFilters){
+        // TODO Check if filters changed and update url query
+
+        setFilters(latestFilters) // Update our filters
         setFiltersShown(false) // Hide if displayed on small screen
     }
 
@@ -87,7 +89,7 @@ function MarketPlace() {
     const listingList = results.items ? results.items.map((car) => {
         return <Listing car={car} key={car.id} />
     }) : ''
-    
+
 
     const filtersComponent = <MarketFilters onSubmitted={receiveFilters} />
 
@@ -96,7 +98,7 @@ function MarketPlace() {
             {/* SMALL SCREEN FILTERS */}
             <div className={"filters-aside filters d-lg-none" + (filtersShown ? " shown":"")} onClick={(e) => { if(e.target.classList.contains('filters')){ setFiltersShown(false) }}}>
                 <div>
-            
+
                     <div className="bg-default p-3 text-white d-flex align-items-center filters-header">
                         <h5 className="my-0 text-white float-left">
                             <i className="fa fa-fw fa-filter"></i>
@@ -228,7 +230,7 @@ function MarketPlace() {
 
                                         </div>
                                         :
-                                        <div>
+                                        <div className="row">
                                             {listingList}
                                         </div>
                                 )

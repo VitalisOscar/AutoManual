@@ -14,6 +14,7 @@
 
     <script src="{{ asset('js/app.js') }}"></script>
 
+    <script src="https://kit.fontawesome.com/ce4529ea37.js" crossorigin="anonymous"></script>
     <script defer src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
     <script defer src="{{ asset('plugins/popper/popper.min.js') }}"></script>
     <script defer src="{{ asset('plugins/bootstrap/bootstrap.min.js') }}"></script>

@@ -56,6 +56,7 @@ const useApplyCarFilters = (url, filters) => {
 
     if(filters.car_make !== "") params.push("make=" + filters.car_make)
     if(filters.car_model !== "") params.push("model=" + filters.car_model)
+    if(filters.sort !== "") params.push("sort=" + filters.sort)
 
     // If no filters at all, just return the url
     if(params.length === 0) return url
