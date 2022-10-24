@@ -1,5 +1,7 @@
 // Definition of API routes
 const API_ENDPOINTS = {
+    GET_COUNTRIES: 'data/countries',
+
     GET_CAR_DATA_OPTIONS: 'data/car/options',
     GET_CAR_MODELS: 'data/car/models',
 

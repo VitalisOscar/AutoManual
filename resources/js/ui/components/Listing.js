@@ -9,7 +9,7 @@ function Listing({ car }) {
 
     return (
         <div className="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12 ad-wrap">
-            <div className="ad">
+            <div className={car.is_boosted ? "ad boosted" : "ad"}>
                 <div className="card">
                     <div className="container-fluid px-0">
                         <div className="row no-gutters">
@@ -32,19 +32,14 @@ function Listing({ car }) {
                                 </div>
 
                                 <div className="img-wrap">
-
-                                    <span className="top-badge">
-                                        <i className="fa fa-certificate"></i>
-                                    </span>
-
-                                        <div style={{background: "url(" + car.main_image.url + ")", backgroundSize: "cover"}}>
-                                            <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})} className="d-block position-absolute top-0 bottom-0 right-0 left-0">
-                                                <div className="position-absolute bottom-0 right-0 d-inline-block py-1 px-2 rounded bg-dark">
-                                                    <i className="fa fa-photo text-white mr-2"></i>
-                                                    <span className="text-white">{car.total_images}</span>
-                                                </div>
-                                            </Link>
-                                        </div>
+                                    <div style={{background: "url(" + car.main_image.url + ")", backgroundSize: "cover"}}>
+                                        <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})} className="d-block position-absolute top-0 bottom-0 right-0 left-0">
+                                            <div className="position-absolute bottom-0 right-0 d-inline-block py-1 px-2 rounded bg-dark">
+                                                <i className="fa fa-photo text-white mr-2"></i>
+                                                <span className="text-white">{car.total_images}</span>
+                                            </div>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
 
@@ -102,6 +97,17 @@ function Listing({ car }) {
 
                                     </div>
                                 </div>
+                                {/* END OVERVIEW */}
+
+                                {
+                                    car.is_boosted ?
+                                        <div className="small for-sponsored text-right">
+                                            <i className="text-warning mr-2 fa fa-arrow-up"></i>
+                                            <strong>Boosted</strong>
+                                        </div>
+                                    :
+                                    ''
+                                }
 
                             </div>
 
@@ -135,7 +141,7 @@ function Listing({ car }) {
                                     </div>
 
                                     <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})} className="btn btn-default btn-block shadow-none">
-                                        Open Full Details
+                                        Full Details
                                     </Link>
                                 </div>
                             </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CarDataProvider } from '../context/car_data';
 import { UserProvider } from '../context/user';
 import { APP_ROUTES } from '../routes';
 import Footer from './Footer';
@@ -16,7 +15,6 @@ function App() {
     return (
         // Makes user available throughout the app
         <UserProvider>
-        <CarDataProvider>
 
             <Header />
 
@@ -35,7 +33,6 @@ function App() {
 
             <Footer />
 
-        </CarDataProvider>
         </UserProvider>
     );
 }

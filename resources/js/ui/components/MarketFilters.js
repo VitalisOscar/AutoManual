@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { API_ENDPOINTS, getApiUrl } from '../../api';
-import { CarDataContext } from '../../context/car_data';
+import { useCarDataOptions } from '../../hooks/car';
 
 function MarketFilters({ showCategories=true, onSubmitted }) {
     const [filters, setFilters] = useState({
@@ -18,7 +18,7 @@ function MarketFilters({ showCategories=true, onSubmitted }) {
     })
 
     // Options we can use to filter
-    const carOptions = useContext(CarDataContext)
+    const carOptions = useCarDataOptions()
 
     // Models for selected car make
     const [car_models, setCarModels] = useState([])

@@ -15,6 +15,7 @@ function ListingPage() {
     const [enquiry, setEnquiry] = useState({
         name: currentUser.name ?? '',
         phone: currentUser.phone ?? '',
+        phone_code: '',
         message: ''
     })
 
@@ -45,6 +46,8 @@ function ListingPage() {
 
     function setEnquiryPhone(event){ setEnquiry({...enquiry, phone: event.target.value}) }
 
+    function setEnquiryPhoneCode(event){ setEnquiry({...enquiry, phone_code: event.target.value}) }
+
     function setEnquiryMessage(event){ setEnquiry({...enquiry, message: event.target.value}) }
 
 
@@ -65,7 +68,12 @@ function ListingPage() {
     return loading ?
         // LOADER
         (
-            <span>Loading...</span>
+            <div className="py-5 d-flex align-items-center justify-content-center">
+                <div className="text-center">
+                    <div className="spinner-border text-primary mb-4"></div>
+                    <div>Just a moment...</div>
+                </div>
+            </div>
         )
         :
         (
@@ -416,7 +424,7 @@ function ListingPage() {
                                                             <div className="input-group">
                                                                 <div className="input-group-prepend">
                                                                     <span className="input-group-text">
-                                                                        +254
+                                                                        <i className="fa fa-phone"></i>
                                                                     </span>
                                                                 </div>
                                                                 <input className="form-control" value={enquiry.phone} onChange={setEnquiryPhone} placeholder="Phone Number" type="tel" minLength="10" maxLength="10" required/>
@@ -468,17 +476,6 @@ function ListingPage() {
 
                             </div>
                             {/* END SECOND SECTION */}
-
-                        </div>
-
-                    </div>
-
-                    <div className="container">
-
-                        <h3 className="heading-title mb-3">Related Vehicles</h3>
-
-                        <div className="row">
-
 
                         </div>
 

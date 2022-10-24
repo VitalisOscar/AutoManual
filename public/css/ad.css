@@ -3,30 +3,30 @@
     box-shadow: 0 0 4px 0 rgba(0,0,0,.3);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
     margin-bottom: 1.5rem;
+    border-radius: .5rem;
 }
 
 .ad .card{
     border: none;
+    border-radius: .5rem;
 }
 
 .ad:hover{
     box-shadow: 0 0 6px 0 rgba(0,0,0,.6);
 }
 
-.ad.featured, .square-ad article.featured{
-    box-shadow: 0 .125rem .25rem rgba(251, 99, 64, .7);
+.ad.boosted, .square-ad .boosted{
+    box-shadow: 0 0 6px 2px rgba(251, 99, 64, .7);
 }
 
-.ad.featured:hover, .square-ad article.featured:hover{
-    box-shadow: 0 3px 9px 1px rgba(251, 99, 64,.9);
+.ad.boosted:hover, .square-ad .boosted:hover{
+    box-shadow: 0 0 9px 2px rgba(251, 99, 64,.9);
 }
 
-.ad .top-badge, .square-ad article .top-badge{
-    display: none;
-}
-
-.ad.featured .top-badge, .square-ad article.featured .top-badge{
-    display: inline-block;
+.ad.boosted .for-boosted,
+.square-ad .boosted .top-badge,
+.square-ad .boosted .for-boosted{
+    display: inline-block !important;
     position: absolute;
     top: 0;
     left: 0;
@@ -34,7 +34,8 @@
     z-index: 2;
 }
 
-.ad.featured .top-badge i, .square-ad article.featured .top-badge i{
+.ad.boosted .top-badge i,
+.square-ad article.boosted .top-badge i{
     font-size: 1.3em;
     color: #ff7f50;
 }
@@ -76,6 +77,7 @@
 
 .ad .title{
     display: none;
+    min-width: 100%;
 }
 
 .ad .title-top{
@@ -354,7 +356,7 @@
 
 @media(min-width:720px){
     .ad .img-wrap{
-        padding-top: 75%
+        padding-top: 75%;
     }
 }
 
@@ -385,6 +387,7 @@
     .ad .img-wrap{
         padding-top: 85%;
         border-bottom: none;
+        border-radius: .5rem 0 0 .5rem;
     }
 
     .ad .relative{

@@ -194,7 +194,12 @@ function MarketPlace() {
                         {
                             loading ?
                                 // LOADER
-                                <span>Loading...</span>
+                                <div className="py-5 d-flex align-items-center justify-content-center">
+                                    <div className="text-center">
+                                        <div className="spinner-border text-primary mb-4"></div>
+                                        <div>Just a moment...</div>
+                                    </div>
+                                </div>
                                 :
                                 // LISTINGS LIST
                                 (
