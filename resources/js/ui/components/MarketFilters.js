@@ -34,8 +34,7 @@ function MarketFilters({ showCategories=true, onSubmitted }) {
         if(filters.car_make !== ""){
             setModelsLoading(true)
 
-            fetch(getApiUrl(API_ENDPOINTS.GET_CAR_MODELS) + "?make=" + filters.car_make)
-                .then(response => response.json())
+            useGetRequest(getApiUrl(API_ENDPOINTS.GET_CAR_MODELS) + "?make=" + filters.car_make)
                 .then(response => {
                     setModelsLoading(false)
 

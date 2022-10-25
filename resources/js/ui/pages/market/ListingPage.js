@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
 import { UserContext } from '../../../context/user';
+import { useGetRequest } from '../../../hooks/request';
 import { APP_ROUTES, getAppRoute } from '../../../routes';
 import NotFound from '../NotFound';
 
@@ -13,8 +14,8 @@ function ListingPage() {
     const {currentUser} = useContext(UserContext)
 
     const [enquiry, setEnquiry] = useState({
-        name: currentUser.name ?? '',
-        phone: currentUser.phone ?? '',
+        name: currentUser ? currentUser.name : '',
+        phone: currentUser ? currentUser.phone : '',
         phone_code: '',
         message: ''
     })
@@ -24,10 +25,9 @@ function ListingPage() {
 
     // Fetch the listing
     useEffect(() => {
-        fetch(getApiUrl(API_ENDPOINTS.GET_SINGLE_MARKETPLACE_CAR, {
+        useGetRequest(getApiUrl(API_ENDPOINTS.GET_SINGLE_MARKETPLACE_CAR, {
             slug: params.slug
         }))
-        .then(response => response.json())
         .then(response => {
             setLoading(false)
 
@@ -80,8 +80,8 @@ function ListingPage() {
             car ?
                 (
                 // CAR INFO
-                <section className="py-4 main-content">
-                    <div className="container mb-3">
+                <section className="py-5 main-content">
+                    <div className="container py-4 mb-3">
 
                         <div className="row">
 

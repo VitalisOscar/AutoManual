@@ -3,25 +3,25 @@
     src: local(Roboto Thin), url("../font/roboto/Roboto-Thin.eot");
     src: url("../font/roboto/Roboto-Thin.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Thin.woff2") format("woff2"), url("../font/roboto/Roboto-Thin.woff") format("woff"), url("../font/roboto/Roboto-Thin.ttf") format("truetype");
     font-weight: 200; }
-  
+
   @font-face {
     font-family: "Roboto";
     src: local(Roboto Light), url("../font/roboto/Roboto-Light.eot");
     src: url("../font/roboto/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Light.woff2") format("woff2"), url("../font/roboto/Roboto-Light.woff") format("woff"), url("../font/roboto/Roboto-Light.ttf") format("truetype");
     font-weight: 300; }
-  
+
   @font-face {
     font-family: "Roboto";
     src: local(Roboto Regular), url("../font/roboto/Roboto-Regular.eot");
     src: url("../font/roboto/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Regular.woff2") format("woff2"), url("../font/roboto/Roboto-Regular.woff") format("woff"), url("../font/roboto/Roboto-Regular.ttf") format("truetype");
     font-weight: 400; }
-  
+
   @font-face {
     font-family: "Roboto";
     src: url("../font/roboto/Roboto-Medium.eot");
     src: url("../font/roboto/Roboto-Medium.eot?#iefix") format("embedded-opentype"), url("../font/roboto/Roboto-Medium.woff2") format("woff2"), url("../font/roboto/Roboto-Medium.woff") format("woff"), url("../font/roboto/Roboto-Medium.ttf") format("truetype");
     font-weight: 500; }
-  
+
   @font-face {
     font-family: "Roboto";
     src: url("../font/roboto/Roboto-Bold.eot");
@@ -222,8 +222,14 @@ footer .list-unstyled a:hover{color: #fff}
   background-color: transparent;
 }
 
+.input-group.legacy .input-group-prepend > *,
+.input-group.legacy:focus-within .input-group-prepend > *{
+    border: none !important;
+  }
+
 .input-group.legacy .input-group-append{
   border-left: none;
+  border-radius: 0 .3rem .3rem 0;
   transition: .4s all !important;
   background-color: transparent;
 }
@@ -240,6 +246,7 @@ footer .list-unstyled a:hover{color: #fff}
 .input-group.legacy:focus-within .form-control{
   border-color: #4285f4 !important;
   transition: .4s all !important;
+  background-color: transparent !important;
 }
 
 .input-group.legacy:focus-within .input-group-prepend{

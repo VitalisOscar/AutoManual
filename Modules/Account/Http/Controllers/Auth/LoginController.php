@@ -37,11 +37,11 @@ class LoginController extends Controller
             $user = User::where('email', $request->post('email'))->first();
 
             if($user == null){
-                return Lang::get('account::errors.incorrect_credentials');
+                return $this->json->error(Lang::get('account::errors.incorrect_credentials'));
             }
 
             if(!Hash::check($request->get('password'), $user->getAuthPassword())){
-                return Lang::get('account::errors.incorrect_credentials');
+                return $this->json->error(Lang::get('account::errors.incorrect_credentials'));
             }
 
             // Login successful

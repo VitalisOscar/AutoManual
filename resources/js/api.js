@@ -1,3 +1,6 @@
+const BASE_API_URL = 'http://localhost:8000/api/'
+
+
 // Definition of API routes
 const API_ENDPOINTS = {
     GET_COUNTRIES: 'data/countries',
@@ -5,12 +8,15 @@ const API_ENDPOINTS = {
     GET_CAR_DATA_OPTIONS: 'data/car/options',
     GET_CAR_MODELS: 'data/car/models',
 
+    // AUTH
+    LOGIN: 'account/login',
+    SIGNUP: 'account/signup',
+    REFRESH_USER: 'account/refresh-user',
+
     GET_MARKETPLACE_CARS: 'marketplace',
     GET_MARKETPLACE_CARS_BY_CATEGORY: 'marketplace/:category',
     GET_SINGLE_MARKETPLACE_CAR: 'marketplace/:slug',
 }
-
-const BASE_API_URL = 'http://localhost:8000/api/'
 
 /**
  * Get a full api path

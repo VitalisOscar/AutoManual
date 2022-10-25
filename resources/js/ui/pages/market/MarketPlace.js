@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
 import { useApplyCarFilters } from '../../../hooks/car';
+import { useGetRequest } from '../../../hooks/request';
 import { APP_ROUTES } from '../../../routes';
 import Listing from '../../components/Listing';
 import MarketFilters from '../../components/MarketFilters';
@@ -57,7 +58,7 @@ function MarketPlace() {
             filters
         )
 
-        fetch(url)
+        useGetRequest(url)
             .then((resp) => resp.json())
             .then((fetchedResults) => {
                 // Update the results
