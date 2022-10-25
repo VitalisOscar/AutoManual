@@ -6,11 +6,13 @@ function useCountries(){
     const [countries, setCountries] = useState([]);
 
     useEffect(() => {
-        fetch(getApiUrl(API_ENDPOINTS.GET_COUNTRIES))
+        useGetRequest(getApiUrl(API_ENDPOINTS.GET_COUNTRIES))
             .then((response) => response.json())
             .then((response) => {
                 if(response.success){
                     setCountries(response.data)
+
+                    console.log("APP: Countries fetched")
                 }else{
                     console.log(response.message)
                 }

@@ -14,8 +14,7 @@ const useCarDataOptions = () => {
     })
 
     useEffect(() => {
-        fetch(getApiUrl(API_ENDPOINTS.GET_CAR_DATA_OPTIONS))
-            .then(response => response.json())
+        useGetRequest(getApiUrl(API_ENDPOINTS.GET_CAR_DATA_OPTIONS))
             .then((response) => {
                 if(response.success){
                     setCarData(response.data)
