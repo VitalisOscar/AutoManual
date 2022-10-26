@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { API_ENDPOINTS, getApiUrl } from '../../api';
 import { useCarDataOptions } from '../../hooks/car';
+import { useGetRequest } from '../../hooks/request';
 
 function MarketFilters({ showCategories=true, onSubmitted }) {
     const [filters, setFilters] = useState({

@@ -59,7 +59,6 @@ function MarketPlace() {
         )
 
         useGetRequest(url)
-            .then((resp) => resp.json())
             .then((fetchedResults) => {
                 // Update the results
                 setLoading(false) // Done

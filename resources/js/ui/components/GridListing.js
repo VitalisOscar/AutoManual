@@ -5,7 +5,7 @@ import { useToggleFavorite } from '../../hooks/car';
 import { usePostRequest } from '../../hooks/request';
 import { APP_ROUTES, getAppRoute } from '../../routes';
 
-function Listing({ car, showSeller = true, gridDisplay = false }) {
+function GridListing({ car }) {
     // Whether listing is being added or removed from favorite
     const [togglingFavorite, setTogglingFavorite] = useState(false)
 
@@ -22,9 +22,7 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
     }
 
     return (
-        <div className={
-                "col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12 ad-wrap"
-            }>
+        <div className="col-12 col-sm-6 col-md-12 col-lg-12 col-xl-12 ad-wrap grid-display">
             <div className={car.is_boosted ? "ad boosted" : "ad"}>
                 <div className="card">
                     <div className="container-fluid px-0">
@@ -32,7 +30,46 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
 
                             <div className="col-md-4">
 
-                                {/* CAR IMAGE */}
+                                {/* CAR IMAGE AND TITLE */}
+
+                                <div className="title-top py-2 px-3">
+                                    <h5 className="listing-title my-0" data-toggle="tooltip" title={car.title}>
+                                        <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})}>
+                                            {car.title}
+                                        </Link>
+                                    </h5>
+                                    {
+                                        togglingFavorite ?
+                                        // LOADER FOR FAVORITE
+                                        (
+                                            <span className="fav-btn" title="Wait...">
+                                                <i className="fa fa-spinner fa-spin"></i>
+                                                <span className="overlay"></span>
+                                            </span>
+                                        )
+                                        :
+                                        (
+                                            markedFavorite ?
+                                            // FILLED HEART
+                                            (
+                                                <span className="fav-btn" title="Remove from Favorites" onClick={toggleFavorite}>
+                                                    <i className="fa fa-heart"></i>
+                                                    <span className="overlay"></span>
+                                                </span>
+                                            )
+                                            :
+                                            // OUTLINED HEART
+                                            (
+                                                <span className="fav-btn" title="Add to Favorites" onClick={toggleFavorite}>
+                                                    <i className="fa fa-heart-o"></i>
+                                                    <span className="overlay"></span>
+                                                </span>
+                                            )
+                                        )
+                                    }
+                                    <div className="clearfix"></div>
+                                </div>
+
                                 <div className="img-wrap">
                                     <div style={{background: "url(" + car.main_image.url + ")", backgroundSize: "cover"}}>
                                         <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})} className="d-block position-absolute top-0 bottom-0 right-0 left-0">
@@ -46,8 +83,8 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
                             </div>
 
                             <div className="col-md-5 ad-info">
-                                {/* CAR TITLE, FAVORITE, LOCATION AND DATE ADDED */}
-                                <div className="title mb-1 d-flex">
+                                {/* CAR LOCATION AND DATE ADDED */}
+                                <div className="title mb-1">
                                     <h4 className="listing-title mb-0" data-toggle="tooltip" title={car.title}>
                                         <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})}>
                                         {car.title}
@@ -58,7 +95,7 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
                                         togglingFavorite ?
                                         // LOADER FOR FAVORITE
                                         (
-                                            <span className="fav-btn ml-auto" title="Wait...">
+                                            <span className="fav-btn" title="Wait...">
                                                 <i className="fa fa-spinner fa-spin"></i>
                                                 <span className="overlay"></span>
                                             </span>
@@ -68,7 +105,7 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
                                             markedFavorite ?
                                             // FILLED HEART
                                             (
-                                                <span className="fav-btn ml-auto" title="Remove from Favorites" onClick={toggleFavorite}>
+                                                <span className="fav-btn" title="Remove from Favorites" onClick={toggleFavorite}>
                                                     <i className="fa fa-heart"></i>
                                                     <span className="overlay"></span>
                                                 </span>
@@ -76,13 +113,14 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
                                             :
                                             // OUTLINED HEART
                                             (
-                                                <span className="fav-btn ml-auto" title="Add to Favorites" onClick={toggleFavorite}>
+                                                <span className="fav-btn" title="Add to Favorites" onClick={toggleFavorite}>
                                                     <i className="fa fa-heart-o"></i>
                                                     <span className="overlay"></span>
                                                 </span>
                                             )
                                         )
                                     }
+                                    <div className="clearfix"></div>
                                 </div>
 
                                 <div className="d-md-flex align-items-center">
@@ -142,35 +180,29 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
                                     {/* PRICING AND SELLER */}
                                     <h4 className="car-price text-dark mb-2">{car.price}</h4>
 
-                                    {
-                                        showSeller ?
+                                    <div className="seller mb-3">
+                                        <Link to={
+                                                getAppRoute(APP_ROUTES.MARKET_SELLER_PAGE, {
+                                                    slug: car.seller.slug
+                                                })
+                                            }
+                                            title={"More by " + car.seller.name}
+                                            className="d-inline-block mb-1"
+                                        >
+                                            <img src={car.seller.logo} alt={car.seller.name} className="seller-logo" />
+                                        </Link>
 
-                                            <div className="seller mb-3">
-                                                <Link to={
-                                                        getAppRoute(APP_ROUTES.MARKET_SELLER_PAGE, {
-                                                            slug: car.seller.slug
-                                                        })
-                                                    }
-                                                    title={"More by " + car.seller.name}
-                                                    className="d-inline-block mb-1"
-                                                >
-                                                    <img src={car.seller.logo} alt={car.seller.name} className="seller-logo" />
-                                                </Link>
-
-                                                {/* VERIFICATION STATUS */}
-                                                {
-                                                    car.seller.verified ?
-                                                        <div className="verified-seller d-flex align-items-center pl-3" title="The seller has been verified by AutoManual">
-                                                            <strong className="text-success">Verified</strong>
-                                                            <img src="/img/icons/verified.png" alt="Verified Seller" className="ml-auto mr-0 d-inline-block"/>
-                                                        </div>
-                                                    :
-                                                        ''
-                                                }
-                                            </div>
-                                        :
-                                        ''
-                                    }
+                                        {/* VERIFICATION STATUS */}
+                                        {
+                                            car.seller.verified ?
+                                                <div className="verified-seller d-flex align-items-center pl-3" title="The seller has been verified by AutoManual">
+                                                    <strong className="text-success">Verified</strong>
+                                                    <img src="/img/icons/verified.png" alt="Verified Seller" className="ml-auto mr-0 d-inline-block"/>
+                                                </div>
+                                            :
+                                                ''
+                                        }
+                                    </div>
 
                                     <Link to={getAppRoute(APP_ROUTES.MARKET_SINGLE_CAR, {slug: car.slug})} className="btn btn-default btn-block shadow-none">
                                         Full Details
@@ -186,4 +218,4 @@ function Listing({ car, showSeller = true, gridDisplay = false }) {
     );
 }
 
-export default Listing;
+export default GridListing;

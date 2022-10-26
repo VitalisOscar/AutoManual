@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
 import { UserContext } from '../../../context/user';
+import { useToggleFavorite } from '../../../hooks/car';
 import { useGetRequest } from '../../../hooks/request';
 import { APP_ROUTES, getAppRoute } from '../../../routes';
 import NotFound from '../NotFound';
@@ -9,7 +10,15 @@ import NotFound from '../NotFound';
 function ListingPage() {
     // Component Data
     const [car, setCar] = useState(null)
-    const [loading, setLoading] = useState(true)
+
+    const [loading, setLoading] = useState(true) // Doing some request
+
+    // Whether listing is being added or removed from favorite
+    const [togglingFavorite, setTogglingFavorite] = useState(false)
+
+    // Whether the car is current user's favorite
+    const [markedFavorite, setMarkedFavorite] = useState(false)
+
 
     const {currentUser} = useContext(UserContext)
 
@@ -29,19 +38,29 @@ function ListingPage() {
             slug: params.slug
         }))
         .then(response => {
-            setLoading(false)
-
             if(response.success){
                 setCar(response.data)
+                setMarkedFavorite(response.data.is_favorite)
             }else{
                 console.log(response.message)
             }
+
+            setLoading(false)
         })
         .catch(error => console.log(error))
     }, [])
 
 
     // EVENT HANDLERS
+    function toggleFavorite(){
+        // Check if already toggling
+        if(togglingFavorite){
+            return
+        }
+
+        useToggleFavorite(car, setTogglingFavorite, setMarkedFavorite)
+    }
+
     function setEnquiryName(event){ setEnquiry({...enquiry, name: event.target.value}) }
 
     function setEnquiryPhone(event){ setEnquiry({...enquiry, phone: event.target.value}) }
@@ -96,10 +115,35 @@ function ListingPage() {
                                         <div className="d-flex align-items-top mb-3">
                                             <h1 className="heading-title font-weight-700 title float-left">{car.title}</h1>
 
-                                            <span id="fav-btn" className="fav-btn" data-toggle="tooltip" onClick={addFavorite} title="Add to Favorites">
-                                                <i id="fav-icon" className="fa fa-heart-o"></i>
-                                                <span className="overlay"></span>
-                                            </span>
+                                            {
+                                                togglingFavorite ?
+                                                // LOADER FOR FAVORITE
+                                                (
+                                                    <span className="fav-btn ml-auto" title="Wait...">
+                                                        <i className="fa fa-spinner fa-spin"></i>
+                                                        <span className="overlay"></span>
+                                                    </span>
+                                                )
+                                                :
+                                                (
+                                                    markedFavorite ?
+                                                    // FILLED HEART
+                                                    (
+                                                        <span className="fav-btn ml-auto" title="Remove from Favorites" onClick={toggleFavorite}>
+                                                            <i className="fa fa-heart"></i>
+                                                            <span className="overlay"></span>
+                                                        </span>
+                                                    )
+                                                    :
+                                                    // OUTLINED HEART
+                                                    (
+                                                        <span className="fav-btn ml-auto" title="Add to Favorites" onClick={toggleFavorite}>
+                                                            <i className="fa fa-heart-o"></i>
+                                                            <span className="overlay"></span>
+                                                        </span>
+                                                    )
+                                                )
+                                            }
 
                                             <div className="clearfix"></div>
                                         </div>

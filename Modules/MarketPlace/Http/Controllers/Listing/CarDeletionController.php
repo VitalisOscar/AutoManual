@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Lang;
 use Modules\MarketPlace\Events\CarDeletedEvent;
 use Modules\MarketPlace\Events\CarRestoredEvent;
 use Modules\MarketPlace\Repository\SellerCarRepository;
-use Modules\MarketPlace\Traits\CarListingDeletion;
+use Modules\MarketPlace\Traits\Seller\CarListingDeletion;
 
 class CarDeletionController extends Controller
 {

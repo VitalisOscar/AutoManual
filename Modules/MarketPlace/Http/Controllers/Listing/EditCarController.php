@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Modules\MarketPlace\Events\CarUpdatedEvent;
 use Modules\MarketPlace\Repository\SellerCarRepository;
-use Modules\MarketPlace\Traits\ManagesCarListingInfo;
+use Modules\MarketPlace\Traits\Seller\ManagesCarListingInfo;
 
 class EditCarController extends Controller
 {

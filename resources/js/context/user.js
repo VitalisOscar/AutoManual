@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_ENDPOINTS, getApiUrl } from '../api';
-import useGetRequest from '../hooks/request';
+import { useGetRequest } from '../hooks/request';
 
 const UserContext = React.createContext();
 
@@ -10,7 +10,7 @@ function UserProvider({ children }){
 
     // Whether the auth state is being validated
     const [refreshingUser, setRefreshingUser] = useState(true)
-
+    
     // Refresh the current user info
     useEffect(() => {
         // TODO maintain and fetch from a storage provider

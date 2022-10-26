@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Lang;
 use Modules\MarketPlace\Events\CarUpdatedEvent;
 use Modules\MarketPlace\Models\CarImage;
 use Modules\MarketPlace\Repository\SellerCarRepository;
-use Modules\MarketPlace\Traits\ManagesCarImages;
+use Modules\MarketPlace\Traits\Seller\ManagesCarImages;
 
 class CarImagesController extends Controller
 {

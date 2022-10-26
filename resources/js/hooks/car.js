@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { API_ENDPOINTS, getApiUrl } from "../api";
+import { useGetRequest, usePostRequest } from "./request";
 
 /**
  * Fetches car data options such as makes, categories, body types etc
@@ -76,4 +77,29 @@ const useApplyCarFilters = (url, filters) => {
     return url + query
 }
 
-export { useCarDataOptions, useApplyCarFilters }
+/**
+ * Toggle a car listing favorite status
+ */
+function useToggleFavorite(car, setTogglingFavorite, setMarkedFavorite){
+
+    setTogglingFavorite(true)
+
+    // Send request
+    usePostRequest(getApiUrl(API_ENDPOINTS.ADD_OR_REMOVE_FAVORITE, {slug: car.slug}), {})
+        .then((response) => {
+            setTogglingFavorite(false)
+
+            if(response.success){
+                // Status was toggled
+                car.is_favorite = !car.is_favorite
+                setMarkedFavorite(car.is_favorite)
+            }else{
+                // TODO handle error appropriately
+                alert(response.message)
+            }
+
+        })
+        .catch((error) => console.log(error))
+}
+
+export { useCarDataOptions, useApplyCarFilters, useToggleFavorite }

@@ -7,6 +7,7 @@ use Modules\MarketPlace\Http\Controllers\Listing\CarImagesController;
 use Modules\MarketPlace\Http\Controllers\Listing\EditCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\ListedCarsController;
 use Modules\MarketPlace\Http\Controllers\MarketPlace\PublicListingsController;
+use Modules\MarketPlace\Http\Controllers\User\FavoritesController;
 
 // public Listings
 Route::prefix('marketplace')
@@ -27,6 +28,19 @@ Route::prefix('marketplace')
     }); // End single
 
 }); // End public listings
+
+
+// User functionality
+Route::prefix('user')
+->name('user')
+->middleware('auth:user')
+->group(function(){
+
+    Route::get('favorites', [FavoritesController::class, 'getAll'])->name('favorites');
+    Route::post('favorites/{car_slug}/toggle', [FavoritesController::class, 'addOrRemove'])->name('toggle_favorite');
+
+}); // End user functionality
+
 
 
 Route::prefix('seller')

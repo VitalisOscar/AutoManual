@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Traits\Misc\FormatedTime;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Account\Models\User;
 use Modules\Seller\Models\Seller;
 
 class Car extends Model
@@ -66,7 +67,8 @@ class Car extends Model
 
     protected $appends = [
         'added_on',
-        'total_images'
+        'total_images',
+        // 'is_favorite'
     ];
 
     protected $hidden = [
@@ -99,6 +101,7 @@ class Car extends Model
 
     function main_image(){ return $this->hasOne(CarImage::class, 'car_id')->main(); }
 
+    function favorite_to(){ return $this->belongsToMany(User::class, Favorite::TABLE_NAME); }
 
     // Scopes
     function scopePendingApproval($q){

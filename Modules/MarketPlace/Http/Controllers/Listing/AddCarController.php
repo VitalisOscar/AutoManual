@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Modules\MarketPlace\Events\CarListedEvent;
 use Modules\MarketPlace\Models\Car;
-use Modules\MarketPlace\Traits\ManagesCarListingInfo;
+use Modules\MarketPlace\Traits\Seller\ManagesCarListingInfo;
 
 class AddCarController extends Controller
 {

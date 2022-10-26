@@ -13,9 +13,14 @@ const API_ENDPOINTS = {
     SIGNUP: 'account/signup',
     REFRESH_USER: 'account/refresh-user',
 
+    // MARKETPLACE
     GET_MARKETPLACE_CARS: 'marketplace',
     GET_MARKETPLACE_CARS_BY_CATEGORY: 'marketplace/:category',
     GET_SINGLE_MARKETPLACE_CAR: 'marketplace/:slug',
+    
+    // USER
+    GET_FAVORITE_CARS: 'user/favorites',
+    ADD_OR_REMOVE_FAVORITE: 'user/favorites/:slug/toggle',
 }
 
 /**

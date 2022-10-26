@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\MarketPlace\Traits;
+namespace Modules\MarketPlace\Traits\Seller;
 
 use Exception;
 use Illuminate\Http\UploadedFile;

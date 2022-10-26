@@ -9,6 +9,8 @@ return [
     'listing_deleted' => 'The listing has been permanently deleted',
     'listing_restored' => 'The listing has been restored',
 
+    'favorite_status_updated' => 'Favorite status updated',
+
     // images
     'images_uploaded' => 'The car images have been uploaded successfully',
     'images_removed' => 'The selected images have been removed from the listing',
