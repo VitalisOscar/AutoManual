@@ -14,6 +14,10 @@ import NotFound from './pages/NotFound';
 import Favorites from './pages/user/Favorites';
 import Signup from './pages/auth/Signup';
 import VerifyEmail from './pages/auth/VerifyEmail';
+import Alerts from './pages/user/Alerts';
+import Account from './pages/user/Account';
+import CreateAd from './pages/seller/CreateAd';
+import SellerAds from './pages/seller/SellerAds';
 
 function App() {
     return (
@@ -46,7 +50,12 @@ function App() {
 
                                 {/* USER PAGES */}
                                 <Route path={APP_ROUTES.FAVORITES} element={<Favorites />} />
+                                <Route path={APP_ROUTES.ALERTS} element={<Alerts />} />
+                                <Route path={APP_ROUTES.ACCOUNT} element={<Account />} />
 
+                                 {/* SELELR PAGES */}
+                                <Route path={APP_ROUTES.CREATE_AD} element={<CreateAd />} />
+                                <Route path={APP_ROUTES.VIEW_ADS} element={<SellerAds />} />
 
                                 {/* 404 */}
                                 <Route path="*" element={<NotFound />} />

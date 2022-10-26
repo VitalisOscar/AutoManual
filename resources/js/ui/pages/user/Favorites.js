@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { API_ENDPOINTS, getApiUrl } from '../../../api';
-import { useApplyCarFilters } from '../../../hooks/car';
 import { useGetRequest } from '../../../hooks/request';
 import { APP_ROUTES } from '../../../routes';
 import Listing from '../../components/Listing';
+import UserNav from '../../components/UserNav';
 
 function Favorites() {
     // COMPONENT DATA
@@ -18,7 +18,7 @@ function Favorites() {
 
 
     /**
-     * Updates by getting the latest results when page is loaded or filters change
+     * Updates by getting the latest results when page is loaded
      */
     function fetchFavorites(){
         // Notify that loading is ongoing
@@ -48,7 +48,7 @@ function Favorites() {
         return <Listing
             car={car}
             key={car.id}
-            showSeller={false} // Minimized detail - no seller
+            showSeller={true}
             gridDisplay={true} // Display as grid
             />
     }) : ''
@@ -61,27 +61,20 @@ function Favorites() {
 
                 <div className="row">
 
+                    {/* USER NAV */}
+                    <div className="col-md-3 user-nav-aside d-none d-md-block">
+                        <UserNav />
+                    </div>
+                    {/* END USER NAV */}
+
                     {/* LISTINGS SECTION */}
-                    <div className="col-12 results">
+                    <div className="col-md-9 pl-md-4 results">
 
-                        {/* TOP PART - HEADER AND SORTING */}
-                        <div className="mb-4 section-top">
-
-                            <div className="d-md-flex align-items-center">
-                                <div className="float-md-left mr-md-auto mb-3 mb-md-0">
-                                    <h1 className="h2 font-weight-bold mb-0">
-                                        Favorites
-                                    </h1>
-                                </div>
-
-                                <div className="clearfix"></div>
-                            </div>
-
-                            <button className="create-alert btn btn-warning" title="Create Alert">
-                                <i className="fa fa-bell"></i>
-                            </button>
+                        {/* TOP PART - HEADER */}
+                        <div className="d-flex align-items-center mb-3">
+                            <h3 className="heading-title mx-3 mx-sm-0">Favorite Cars</h3>
                         </div>
-                        {/* END RESULTS TOP PART */}
+                        {/* END TOP PART */}
 
 
                         {/* LISTINGS PART */}
@@ -115,7 +108,6 @@ function Favorites() {
                                                         </div>
 
                                                         <ul>
-                                                            <li className="mb-1">Change your filters</li>
                                                             <li className="mb-1">
                                                                 Browse some <Link to={APP_ROUTES.MARKET_MAIN}>car listings</Link> and try out
                                                             </li>
