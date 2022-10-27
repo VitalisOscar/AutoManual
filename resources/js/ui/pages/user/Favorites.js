@@ -13,19 +13,14 @@ function Favorites() {
     const [loading, setLoading] = useState(false) // Whether results are being fetched at the moment
 
 
-    // We'll fetch results when filters are updated
     useEffect(fetchFavorites, [])
 
 
-    /**
-     * Updates by getting the latest results when page is loaded
-     */
     function fetchFavorites(){
         // Notify that loading is ongoing
         setLoading(true)
 
         // The url for fetching results
-        // With filters applied as a query string
         var url = getApiUrl(API_ENDPOINTS.GET_FAVORITE_CARS)
 
         useGetRequest(url)

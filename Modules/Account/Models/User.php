@@ -9,6 +9,7 @@ use App\Traits\Misc\FormatedTime;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Modules\MarketPlace\Models\Alert;
 use Modules\MarketPlace\Models\Car;
 use Modules\MarketPlace\Models\Favorite;
 use Modules\Seller\Models\Seller;
@@ -63,6 +64,8 @@ class User extends AuthUser
     function seller(){ return $this->hasOne(Seller::class, 'user_id'); }
 
     function favorites(){ return $this->belongsToMany(Car::class, Favorite::TABLE_NAME); }
+
+    function alerts(){ return $this->hasMany(Alert::class, 'user_id'); }
 
 
     // Scopes

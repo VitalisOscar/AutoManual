@@ -11,6 +11,9 @@ return [
 
     'favorite_status_updated' => 'Favorite status updated',
 
+    'alert_created' => 'The alert has been created successfully',
+    'alert_deleted' => 'The alert has been deleted',
+
     // images
     'images_uploaded' => 'The car images have been uploaded successfully',
     'images_removed' => 'The selected images have been removed from the listing',

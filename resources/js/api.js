@@ -17,10 +17,14 @@ const API_ENDPOINTS = {
     GET_MARKETPLACE_CARS: 'marketplace',
     GET_MARKETPLACE_CARS_BY_CATEGORY: 'marketplace/:category',
     GET_SINGLE_MARKETPLACE_CAR: 'marketplace/:slug',
-    
+
     // USER
     GET_FAVORITE_CARS: 'user/favorites',
     ADD_OR_REMOVE_FAVORITE: 'user/favorites/:slug/toggle',
+
+    GET_ALERTS: 'user/alerts',
+    CREATE_ALERT: 'user/alerts/add',
+    DELETE_ALERT: 'user/alerts/:alert_id/delete',
 }
 
 /**

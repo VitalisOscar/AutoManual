@@ -8,6 +8,7 @@ use Modules\MarketPlace\Http\Controllers\Listing\EditCarController;
 use Modules\MarketPlace\Http\Controllers\Listing\ListedCarsController;
 use Modules\MarketPlace\Http\Controllers\MarketPlace\PublicListingsController;
 use Modules\MarketPlace\Http\Controllers\User\FavoritesController;
+use Modules\MarketPlace\Http\Controllers\User\UserAlertsController;
 
 // public Listings
 Route::prefix('marketplace')
@@ -38,6 +39,10 @@ Route::prefix('user')
 
     Route::get('favorites', [FavoritesController::class, 'getAll'])->name('favorites');
     Route::post('favorites/{car_slug}/toggle', [FavoritesController::class, 'addOrRemove'])->name('toggle_favorite');
+
+    Route::get('alerts', [UserAlertsController::class, 'getAll'])->name('alerts');
+    Route::post('alerts/add', [UserAlertsController::class, 'add'])->name('alerts.add');
+    Route::post('alerts/{alert_id}/delete', [UserAlertsController::class, 'delete'])->name('alerts.delete');
 
 }); // End user functionality
 

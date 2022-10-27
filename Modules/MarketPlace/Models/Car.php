@@ -128,6 +128,10 @@ class Car extends Model
             });
     }
 
+    function savedBy($user){
+        return $this->favorite_to()->where(User::TABLE_NAME.'.id', $user->id)->first() != null;
+    }
+
 
     // helpers
     function isApproved(){ return $this->status == self::STATUS_APPROVED; }

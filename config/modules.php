@@ -106,7 +106,7 @@ return [
             'migration' => ['path' => 'database/migrations', 'generate' => true],
             'seeder' => ['path' => 'database/seeds', 'generate' => true],
             'factory' => ['path' => 'database/factories', 'generate' => true],
-            'model' => ['path' => 'Entities', 'generate' => true],
+            'model' => ['path' => 'Models', 'generate' => true],
             'routes' => ['path' => 'Routes', 'generate' => true],
             'controller' => ['path' => 'Http/Controllers', 'generate' => true],
             'filter' => ['path' => 'Http/Middleware', 'generate' => true],
