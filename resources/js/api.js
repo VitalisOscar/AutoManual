@@ -25,6 +25,10 @@ const API_ENDPOINTS = {
     GET_ALERTS: 'user/alerts',
     CREATE_ALERT: 'user/alerts/add',
     DELETE_ALERT: 'user/alerts/:alert_id/delete',
+
+    // SELLER
+    GET_SELLER_CARS: 'seller/listings',
+
 }
 
 /**

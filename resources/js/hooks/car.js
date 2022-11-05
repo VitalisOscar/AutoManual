@@ -64,9 +64,10 @@ const useApplyCarFilters = (url, filters) => {
         })
     }
 
-    if(filters.car_make !== "") params.push("make=" + filters.car_make)
-    if(filters.car_model !== "") params.push("model=" + filters.car_model)
-    if(filters.sort !== "") params.push("sort=" + filters.sort)
+    if(filters.car_make && filters.car_make !== "") params.push("make=" + filters.car_make)
+    if(filters.car_model && filters.car_model !== "") params.push("model=" + filters.car_model)
+    if(filters.sort && filters.sort !== "") params.push("sort=" + filters.sort)
+    if(filters.status && filters.status !== "") params.push("status=" + filters.status)
 
     // If no filters at all, just return the url
     if(params.length === 0) return url
@@ -102,4 +103,20 @@ function useToggleFavorite(car, setTogglingFavorite, setMarkedFavorite){
         .catch((error) => console.log(error))
 }
 
-export { useCarDataOptions, useApplyCarFilters, useToggleFavorite }
+/**
+ * Fetch car models for a particular car make
+ */
+function useFetchCarModelsByMake(car_make_id, onFetched){
+    if(car_make_id !== ""){
+        useGetRequest(getApiUrl(API_ENDPOINTS.GET_CAR_MODELS) + "?make=" + car_make_id)
+            .then(response => {
+                if(response.success){
+                    // Models are at data
+                    onFetched(response.data)
+                }
+            })
+            .catch((error) => console.log(error))
+    }
+}
+
+export { useCarDataOptions, useApplyCarFilters, useToggleFavorite, useFetchCarModelsByMake }

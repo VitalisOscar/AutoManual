@@ -17,13 +17,15 @@ const APP_ROUTES = {
     FAVORITES: '/favorites',
     ACCOUNT: '/account',
     ALERTS: '/alerts',
+    CREATE_ALERT: '/alerts/create',
     SUBSCRIPTIONS: '/subscriptions',
 
     // SELLER
     SELLER_HQ: '/seller/hq',
     SELLER_REGISTRATION: '/seller/register',
-    VIEW_ADS: '/ads',
-    CREATE_AD: '/new-ad',
+    VIEW_ADS: '/seller/ads',
+    VIEW_SINGLE_SELLER_AD: '/seller/ads/:slug',
+    CREATE_AD: '/seller/new-ad',
 
     // INFO
     TERMS: '/terms',

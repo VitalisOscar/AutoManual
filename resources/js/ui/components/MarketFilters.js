@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { API_ENDPOINTS, getApiUrl } from '../../api';
-import { useCarDataOptions } from '../../hooks/car';
+import { useCarDataOptions, useFetchCarModelsByMake } from '../../hooks/car';
 import { useGetRequest } from '../../hooks/request';
 
 function MarketFilters({ showCategories=true, onSubmitted }) {
@@ -22,31 +22,22 @@ function MarketFilters({ showCategories=true, onSubmitted }) {
     const carOptions = useCarDataOptions()
 
     // Models for selected car make
-    const [car_models, setCarModels] = useState([])
-    const [modelsLoading, setModelsLoading] = useState(false)
+    const [carModels, setCarModels] = useState([])
+
+    const [carModelsLoading, setCarModelsLoading] = useState(false)
 
     // We shall fetch car models when car make filter changes
-    useEffect(fetchCarModels, [filters.car_make])
+    useEffect(() => {
+        setCarModelsLoading(true)
+
+        useFetchCarModelsByMake(filters.car_make, setCarModels)
+    }, [filters.car_make])
 
 
-    function fetchCarModels(){
-        setCarModels([])
-
-        if(filters.car_make !== ""){
-            setModelsLoading(true)
-
-            useGetRequest(getApiUrl(API_ENDPOINTS.GET_CAR_MODELS) + "?make=" + filters.car_make)
-                .then(response => {
-                    setModelsLoading(false)
-
-                    if(response.success){
-                        // Models are at data
-                        setCarModels(response.data)
-                    }
-                })
-        }
-    }
-
+    // Set models loading to false when they are fetched
+    useEffect(() => {
+        setCarModelsLoading(false)
+    }, [carModels])
 
     // Event handlers
     function updateKeyword(event){ setFilters({...filters, keyword: event.target.value}) }
@@ -159,7 +150,7 @@ function MarketFilters({ showCategories=true, onSubmitted }) {
 
     // Map our filters from available options
     const car_make_filters = carOptions.car_makes.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
-    const car_model_filters = car_models.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
+    const car_model_filters = carModels.map((option) => (<option value={option.id} key={option.id}>{option.name}</option>))
 
     const category_filters = carOptions.categories.map((option) => (
         <div className="custom-control custom-checkbox mb-2" key={option.id}>
@@ -324,7 +315,7 @@ function MarketFilters({ showCategories=true, onSubmitted }) {
 
                         <div className="input-group">
                             <select className="form-control" value={filters.car_model} onChange={handleCarModelChange}>
-                                <option value="">{modelsLoading ? "Loading..." : "All models"}</option>
+                                <option value="">{carModelsLoading ? "Loading..." : "All models"}</option>
                                 {car_model_filters}
                             </select>
                         </div>

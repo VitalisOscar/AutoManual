@@ -76,7 +76,7 @@ class SellerCarRepository{
                 $query->approved();
             }else if($status == 'rejected'){
                 $query->rejected();
-            }else if($status == 'pending approval'){
+            }else if($status == 'pending'){
                 $query->pendingApproval();
             }else if($status == 'delisted'){
                 $query->delisted();

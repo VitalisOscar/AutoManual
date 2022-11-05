@@ -28,12 +28,24 @@ class Alert extends Model
         'user_id'
     ];
 
+    protected $with = [
+        'category', 'body_type', 'make', 'model'
+    ];
+
+    protected $appends = ['data'];
+
+    protected $hidden = [
+        'category', 'body_type', 'make', 'model', 'user_id',
+        'category_id', 'body_type_id', 'car_make_id', 'car_model_id',
+        'maximum_price', 'maximum_mileage', 'transmission', 'town',
+    ];
+
     // Relations
     function user(){ return $this->belongsTo(User::class, 'user_id'); }
 
     function category(){ return $this->belongsTo(Category::class, 'category_id'); }
 
-    function make(){ return $this->belongsTo(CarMake::class, 'car_make_id'); }
+    function make(){ return $this->belongsTo(CarMake::class, 'make_id'); }
 
     function model(){ return $this->belongsTo(CarModel::class, 'car_model_id'); }
 
@@ -65,7 +77,7 @@ class Alert extends Model
             });
 
         $attributes = [
-            'category_id', 'body_type_id', 'car_make_id', 'car_model_id', 'transmission'
+            'category_id', 'body_type_id', 'make_id', 'car_model_id', 'transmission'
         ];
 
         foreach($attributes as $attribute){
@@ -76,4 +88,22 @@ class Alert extends Model
         }
     }
 
+
+
+
+    function getDataAttribute(){
+        $data = [];
+
+        if($this->category) $data['category'] = $this->category;
+        if($this->body_type) $data['body_type'] = $this->body_type;
+        if($this->model) $data['model'] = $this->model;
+        if($this->make) $data['make'] = $this->make;
+
+        if($this->maximum_price) $data['maximum_price'] = $this->maximum_price;
+        if($this->maximum_mileage) $data['maximum_mileage'] = $this->maximum_mileage;
+        if($this->transmission) $data['transmission'] = $this->transmission;
+        if($this->town) $data['town'] = $this->town;
+
+        return $data;
+    }
 }
